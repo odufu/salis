@@ -130,6 +130,8 @@ List<Property> myProperties = [
       comments: ["The Best Single detarched house i have seen"],
       //PAYMENT
       installmentPlan: InstallmentPlan(
+        minimumInitialPayment: 230000,
+        closingPeriod: 2,
         amountPaid: 500000,
         totalCost: 2000000,
         initialPayment: 500000,
@@ -272,7 +274,7 @@ List<Property> myProperties = [
     coOwnershipPlan: CoOwnershipPlan(
         propertyId: "Props001",
         totalValue: 20000000,
-        numberOfShares: 6,
+        numberOfShares: 4,
         sharePrice: 20),
 
     isTaken: true,
@@ -553,10 +555,9 @@ List<Property> myProperties = [
 
 List<Property> newProperties = [
   Property(
-      title: "Land for 4-Bed Duplex",
-      details:
-          "The very best of comfort in homes as engeneered with the mindset of reliability and maximum comfort",
-      price: 2000000,
+      title: "2-Bed Flat, Appartment",
+      details: "The best of all mindset of reliability and maximum comfort",
+      price: 20000000,
       address: "Salis Court, Gwagwalada, central area",
       cartegory: Cartegory.homes,
       images: [
@@ -573,8 +574,8 @@ List<Property> newProperties = [
       housePlan: "assets/images/plan.jpg",
       eletricity: true,
       security: true,
-      bedrooms: 4,
-      bathrooms: 5,
+      bedrooms: 2,
+      bathrooms: 3,
       water: true,
 
       //CREDIBILITY
@@ -585,47 +586,48 @@ List<Property> newProperties = [
       //PAYMENT
       coOwnershipPlan: CoOwnershipPlan(
         propertyId: "propertyId",
-        totalValue: 2000000,
-        numberOfShares: 6,
-        sharePrice: 333334,
+        totalValue: 20000000,
+        numberOfShares: 5,
+        sharePrice: 3333333.33,
       )),
   Property(
-      title: "Land for 4-Bed Duplex",
-      details:
-          "The very best of comfort in homes as engeneered with the mindset of reliability and maximum comfort",
-      price: 2000000,
-      address: "Salis Court, Gwagwalada, central area",
-      cartegory: Cartegory.homes,
-      images: [
-        "assets/images/props4.jpg",
-        "assets/images/props6.jpg",
-        "assets/images/props7.jpg",
-        "assets/images/props8.jpg",
-        "assets/images/props9.jpg",
-        "assets/images/props11.jpg",
-        "assets/images/props12.jpg",
-      ],
-      video: "assets/images/propsvideo.mp4",
-      siteMap: "assets/images/map.jpg",
-      housePlan: "assets/images/plan.jpg",
-      eletricity: true,
-      security: true,
-      bedrooms: 4,
-      bathrooms: 5,
-      water: true,
-
-      //CREDIBILITY
-      rating: 4,
-      comments: ["The Best Single detarched house i have seen"],
-      //CREDEBILITY
-
-      //PAYMENT
-      outrightPlan: 2000000),
-  Property(
-    title: "Land for 4-Bed Duplex",
+    title: "Sandas Luxo Dubplex 3-Bedroom",
     details:
         "The very best of comfort in homes as engeneered with the mindset of reliability and maximum comfort",
-    price: 2000000,
+    price: 45000000,
+    address: "Salis Court, Gwagwalada, central area",
+    cartegory: Cartegory.homes,
+    images: [
+      "assets/images/props4.jpg",
+      "assets/images/props6.jpg",
+      "assets/images/props7.jpg",
+      "assets/images/props8.jpg",
+      "assets/images/props9.jpg",
+      "assets/images/props11.jpg",
+      "assets/images/props12.jpg",
+    ],
+    video: "assets/images/propsvideo.mp4",
+    siteMap: "assets/images/map.jpg",
+    housePlan: "assets/images/plan.jpg",
+    eletricity: true,
+    security: true,
+    bedrooms: 4,
+    bathrooms: 5,
+    water: true,
+
+    //CREDIBILITY
+    rating: 4,
+    comments: ["The Best Single detarched house i have seen"],
+    //CREDEBILITY
+
+    //PAYMENT
+    outrightPlan: 45000000,
+  ),
+  Property(
+    title: "Semi-Detarched Delux",
+    details:
+        "Super sliked and engeneered with the mindset of reliability and maximum comfort",
+    price: 34000000,
     address: "Salis Court, Gwagwalada, central area",
     cartegory: Cartegory.homes,
     images: [
@@ -642,8 +644,8 @@ List<Property> newProperties = [
     housePlan: "assets/images/plan.jpg",
     eletricity: true,
     security: true,
-    bedrooms: 4,
-    bathrooms: 5,
+    bedrooms: 3,
+    bathrooms: 2,
     water: true,
 
     //CREDIBILITY
@@ -652,15 +654,59 @@ List<Property> newProperties = [
     //CREDEBILITY
 
     //PAYMENT
+    installmentPlan: InstallmentPlan(
+      minimumInitialPayment: 200000,
+      totalCost: 34000000,
+      initialPayment: 5000000,
+      closingPeriod: 1,
+      frequency: PaymentFrequency.monthly,
+    ),
   ),
   Property(
-    title: "Land for 4-Bed Duplex",
+      title: "2-Bed Flat, Appartment",
+      details: "The best of all mindset of reliability and maximum comfort",
+      price: 20000000,
+      address: "Salis Court, Gwagwalada, central area",
+      cartegory: Cartegory.homes,
+      images: [
+        "assets/images/props2.jpg",
+        "assets/images/props6.jpg",
+        "assets/images/props7.jpg",
+        "assets/images/props8.jpg",
+        "assets/images/props9.jpg",
+        "assets/images/props11.jpg",
+        "assets/images/props12.jpg",
+      ],
+      video: "assets/images/propsvideo.mp4",
+      siteMap: "assets/images/map.jpg",
+      housePlan: "assets/images/plan.jpg",
+      eletricity: true,
+      security: true,
+      bedrooms: 2,
+      bathrooms: 3,
+      water: true,
+
+      //CREDIBILITY
+      rating: 4,
+      comments: ["The Best Single detarched house i have seen"],
+      //CREDEBILITY
+
+      //PAYMENT
+      coOwnershipPlan: CoOwnershipPlan(
+        propertyId: "propertyId",
+        totalValue: 20000000,
+        numberOfShares: 5,
+        sharePrice: 3333333.33,
+      )),
+  Property(
+    title: "Sandas Luxo Dubplex 3-Bedroom",
     details:
         "The very best of comfort in homes as engeneered with the mindset of reliability and maximum comfort",
-    price: 2000000,
+    price: 45000000,
     address: "Salis Court, Gwagwalada, central area",
     cartegory: Cartegory.homes,
     images: [
+      "assets/images/props4.jpg",
       "assets/images/props6.jpg",
       "assets/images/props7.jpg",
       "assets/images/props8.jpg",
@@ -683,15 +729,18 @@ List<Property> newProperties = [
     //CREDEBILITY
 
     //PAYMENT
+    outrightPlan: 45000000,
   ),
   Property(
-    title: "Land for 4-Bed Duplex",
+    title: "Semi-Detarched Delux",
     details:
-        "The very best of comfort in homes as engeneered with the mindset of reliability and maximum comfort",
-    price: 2000000,
+        "Super sliked and engeneered with the mindset of reliability and maximum comfort",
+    price: 34000000,
     address: "Salis Court, Gwagwalada, central area",
     cartegory: Cartegory.homes,
     images: [
+      "assets/images/props3.jpg",
+      "assets/images/props6.jpg",
       "assets/images/props7.jpg",
       "assets/images/props8.jpg",
       "assets/images/props9.jpg",
@@ -703,8 +752,8 @@ List<Property> newProperties = [
     housePlan: "assets/images/plan.jpg",
     eletricity: true,
     security: true,
-    bedrooms: 4,
-    bathrooms: 5,
+    bedrooms: 3,
+    bathrooms: 2,
     water: true,
 
     //CREDIBILITY
@@ -713,34 +762,12 @@ List<Property> newProperties = [
     //CREDEBILITY
 
     //PAYMENT
-  ),
-  Property(
-    title: "Land for 4-Bed Duplex",
-    details:
-        "The very best of comfort in homes as engeneered with the mindset of reliability and maximum comfort",
-    price: 2000000,
-    address: "Salis Court, Gwagwalada, central area",
-    cartegory: Cartegory.homes,
-    images: [
-      "assets/images/props8.jpg",
-      "assets/images/props9.jpg",
-      "assets/images/props11.jpg",
-      "assets/images/props12.jpg",
-    ],
-    video: "assets/images/propsvideo.mp4",
-    siteMap: "assets/images/map.jpg",
-    housePlan: "assets/images/plan.jpg",
-    eletricity: true,
-    security: true,
-    bedrooms: 4,
-    bathrooms: 5,
-    water: true,
-
-    //CREDIBILITY
-    rating: 4,
-    comments: ["The Best Single detarched house i have seen"],
-    //CREDEBILITY
-
-    //PAYMENT
+    installmentPlan: InstallmentPlan(
+      minimumInitialPayment: 300000,
+      totalCost: 34000000,
+      initialPayment: 5000000,
+      closingPeriod: 1,
+      frequency: PaymentFrequency.monthly,
+    ),
   ),
 ];

@@ -13,9 +13,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Salis Homes',
       theme: salisMode,
-      home: SplashScreen(),
+      home: const SplashScreen(),
     );
   }
 }

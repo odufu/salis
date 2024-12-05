@@ -1,3 +1,6 @@
+import 'package:salis/salis/payment/presentation/pages/co_ownership_payment_summary_page.dart';
+import 'package:salis/salis/props/data/property.dart';
+
 import '../../../../salis/core/utils/helper_functions.dart';
 import '../../../../salis/core/widgets/app_button.dart';
 import '../../../../salis/myprops/presentation/widgets/buy_share_page.dart';
@@ -5,10 +8,10 @@ import '../../../../salis/props/data/co_ownership.dart';
 import 'package:flutter/material.dart';
 
 class PoolProgressBar extends StatelessWidget {
-  final CoOwnershipPlan plan;
+  final Property property;
 
   const PoolProgressBar({
-    required this.plan,
+    required this.property,
     super.key,
   });
 
@@ -18,7 +21,7 @@ class PoolProgressBar extends StatelessWidget {
       builder: (context, constraints) {
         double availableWidth =
             (constraints.maxWidth - 80).clamp(0, double.infinity);
-        int totalFractions = plan.ownershipShares.length;
+        int totalFractions = property.coOwnershipPlan!.ownershipShares.length;
         double circleDiameter = 24.0;
         double lineWidth = totalFractions > 1
             ? (availableWidth - (totalFractions * circleDiameter)) /
@@ -27,9 +30,11 @@ class PoolProgressBar extends StatelessWidget {
 
         return Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: List.generate(plan.ownershipShares.length, (index) {
-            final pool = plan.ownershipShares[index];
-            final isLast = index == plan.ownershipShares.length - 1;
+          children: List.generate(
+              property.coOwnershipPlan!.ownershipShares.length, (index) {
+            final pool = property.coOwnershipPlan!.ownershipShares[index];
+            final isLast =
+                index == property.coOwnershipPlan!.ownershipShares.length - 1;
 
             return Row(
               children: [
@@ -39,7 +44,10 @@ class PoolProgressBar extends StatelessWidget {
                       showDialog(
                         context: innerContext,
                         builder: (BuildContext context) {
-                          return PoolModal(pool: pool);
+                          return PoolModal(
+                            pool: pool,
+                            property: property,
+                          );
                         },
                       );
                     },
@@ -100,9 +108,11 @@ class Pool {
 }
 
 class PoolModal extends StatelessWidget {
+  final Property property;
   final OwnershipPool pool;
 
   const PoolModal({
+    required this.property,
     required this.pool,
     Key? key,
   }) : super(key: key);
@@ -193,10 +203,7 @@ class PoolModal extends StatelessWidget {
           text: "Buy",
           onPress: () {
             HelperFunctions.routePushTo(
-                BuySharePage(
-                  pool: pool,
-                ),
-                context);
+                CoOwnershipPaymentSummaryPage(property: property), context);
           },
           backgroundColor: const Color.fromARGB(255, 37, 99, 39),
           width: 100,

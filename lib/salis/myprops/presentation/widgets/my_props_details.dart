@@ -112,29 +112,57 @@ class _MyPropsDetailsState extends State<MyPropsDetails> {
                 ),
               ],
             ),
+            const SizedBox(
+              height: 15,
+            ),
 
             // Video Player Section
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16.0),
-              child: AspectRatio(
-                aspectRatio: 16 / 9,
-                child: Chewie(
-                  controller: ChewieController(
-                    videoPlayerController: VideoPlayerController.asset(
-                      widget.property
-                          .video!, // Replace with your video asset or network URL
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Row(
+                children: [
+                  Text(
+                    "WALTHROUGH VIDEO",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).colorScheme.primary,
                     ),
-                    autoPlay: false,
-                    looping: false,
-                    allowFullScreen: true,
-                    materialProgressColors: ChewieProgressColors(
-                      playedColor: Theme.of(context).colorScheme.primary,
-                      handleColor: Colors.red,
-                      backgroundColor: Colors.grey,
-                    ),
-                    placeholder: const Center(
-                      child: Icon(Icons.play_circle_fill,
-                          size: 60, color: Colors.white),
+                  ),
+                  Icon(Icons.video_camera_back_sharp)
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10.0),
+              child: Container(
+                decoration: const BoxDecoration(
+                    border: Border.symmetric(
+                        horizontal: BorderSide(
+                  color: Colors.black,
+                ))),
+                child: AspectRatio(
+                  aspectRatio: 16 / 9,
+                  child: Chewie(
+                    controller: ChewieController(
+                      videoPlayerController: VideoPlayerController.asset(
+                        widget.property
+                            .video!, // Replace with your video asset or network URL
+                      ),
+                      autoPlay: false,
+                      looping: false,
+                      allowFullScreen: true,
+                      materialProgressColors: ChewieProgressColors(
+                        playedColor: Theme.of(context).colorScheme.primary,
+                        handleColor: Colors.red,
+                        backgroundColor: Colors.grey,
+                      ),
+                      placeholder: const Center(
+                        child: Icon(Icons.play_circle_fill,
+                            size: 60, color: Color.fromARGB(255, 54, 4, 4)),
+                      ),
                     ),
                   ),
                 ),
@@ -340,413 +368,16 @@ class _MyPropsDetailsState extends State<MyPropsDetails> {
                     height: 20,
                   ),
 
-                  // // CO-OWN PULL DETAILS
-                  // Text(
-                  //   "Ownership",
-                  //   style: TextStyle(
-                  //     fontWeight: FontWeight.bold,
-                  //     color: Theme.of(context).colorScheme.primary,
-                  //   ),
-                  // ),
-                  // const SizedBox(
-                  //   height: 5,
-                  // ),
-                  // Row(
-                  //   children: [
-                  //     Container(
-                  //       width: 1,
-                  //       height: 40,
-                  //       decoration: BoxDecoration(
-                  //           color: Theme.of(context).colorScheme.primary),
-                  //     ),
-                  //     const SizedBox(
-                  //       width: 15,
-                  //     ),
-                  //     Column(
-                  //       crossAxisAlignment: CrossAxisAlignment.start,
-                  //       children: [
-                  //         Row(
-                  //           children: [
-                  //             const Icon(
-                  //               Icons.show_chart,
-                  //               size: 15,
-                  //             ),
-                  //             const SizedBox(
-                  //               width: 5,
-                  //             ),
-                  //             // Text(
-                  //             //     "My Share: ${(widget.property.price - ((widget.property.coOwnershipPlan!.totalValue)!.toDouble())) * 100 / widget.property.price}%'")
-                  //           ],
-                  //         ),
-                  //         Row(
-                  //           children: [
-                  //             const Icon(
-                  //               Icons.donut_large,
-                  //               size: 15,
-                  //             ),
-                  //             const SizedBox(
-                  //               width: 5,
-                  //             ),
-                  //             // Text(
-                  //             //     "Amount Remaining: ${(widget.property.price - ((widget.property.installmentPlan!.initialPayment).toDouble()))}")
-                  //           ],
-                  //         ),
-                  //       ],
-                  //     ),
-                  //   ],
-                  // ),
-                  // //PRICE AND PAYMENTS
-                  // const SizedBox(
-                  //   height: 20,
-                  // ),
-
-                  // Text(
-                  //   "Price and Payment Details",
-                  //   style: TextStyle(
-                  //     fontWeight: FontWeight.bold,
-                  //     color: Theme.of(context).colorScheme.primary,
-                  //   ),
-                  // ),
-                  // const SizedBox(
-                  //   height: 5,
-                  // ),
-                  // Row(
-                  //   children: [
-                  //     Container(
-                  //       width: 1,
-                  //       height: 40,
-                  //       decoration: BoxDecoration(
-                  //           color: Theme.of(context).colorScheme.primary),
-                  //     ),
-                  //     const SizedBox(
-                  //       width: 15,
-                  //     ),
-                  //     Column(
-                  //       crossAxisAlignment: CrossAxisAlignment.start,
-                  //       children: [
-                  //         Row(
-                  //           children: [
-                  //             const Icon(
-                  //               Icons.payment,
-                  //               size: 15,
-                  //             ),
-                  //             const SizedBox(
-                  //               width: 5,
-                  //             ),
-                  //             Text(
-                  //                 "Total Property Cost: ${widget.property.price}'")
-                  //           ],
-                  //         ),
-                  //         Row(
-                  //           children: [
-                  //             const Icon(
-                  //               Icons.calendar_today,
-                  //               size: 15,
-                  //             ),
-                  //             const SizedBox(
-                  //               width: 5,
-                  //             ),
-                  //             Text("Payment Schedule: ${widget.property.price}")
-                  //           ],
-                  //         ),
-                  //       ],
-                  //     ),
-                  //   ],
-                  // ),
-                  // const SizedBox(
-                  //   height: 20,
-                  // ),
-
-                  // //AVAILABILITY
-                  // Column(
-                  //   crossAxisAlignment: CrossAxisAlignment.start,
-                  //   children: [
-                  //     Text(
-                  //       "AVAILABILITY",
-                  //       style: TextStyle(
-                  //         fontWeight: FontWeight.bold,
-                  //         color: Theme.of(context).colorScheme.primary,
-                  //       ),
-                  //     ),
-                  //     const SizedBox(
-                  //       height: 5,
-                  //     ),
-                  //     Row(
-                  //       children: [
-                  //         Container(
-                  //           width: 1,
-                  //           height: 40,
-                  //           decoration: BoxDecoration(
-                  //               color: Theme.of(context).colorScheme.primary),
-                  //         ),
-                  //         const SizedBox(
-                  //           width: 15,
-                  //         ),
-                  //         Column(
-                  //           crossAxisAlignment: CrossAxisAlignment.start,
-                  //           children: [
-                  //             Row(
-                  //               children: [
-                  //                 Icon(
-                  //                   color:
-                  //                       Theme.of(context).colorScheme.tertiary,
-                  //                   Icons.done_all,
-                  //                   size: 15,
-                  //                 ),
-                  //                 const SizedBox(
-                  //                   width: 5,
-                  //                 ),
-                  //                 Text(
-                  //                     "Status: ${widget.property.isTaken == true ? "Off Market" : "Uncompleted"}")
-                  //               ],
-                  //             ),
-                  //             Row(
-                  //               children: [
-                  //                 Icon(
-                  //                   color:
-                  //                       Theme.of(context).colorScheme.tertiary,
-                  //                   Icons.hourglass_bottom,
-                  //                   size: 15,
-                  //                 ),
-                  //                 const SizedBox(
-                  //                   width: 5,
-                  //                 ),
-                  //                 Text(
-                  //                     "Next Payment:${widget.property.installmentPlan!.paymentSchedules[0]}")
-                  //               ],
-                  //             ),
-                  //           ],
-                  //         ),
-                  //       ],
-                  //     ),
-                  //   ],
-                  // ),
-                  // const SizedBox(
-                  //   height: 25,
-                  // ),
-
-                  // CO OWNERSHIP PROGRESS BAR
-
-                  // SizedBox(
-                  //   width: MediaQuery.of(context).size.width * .9,
-                  //   child: Column(
-                  //     crossAxisAlignment: CrossAxisAlignment.start,
-                  //     children: [
-                  //       Text(
-                  //         "CO-OWNERSHIP PROGRESS",
-                  //         style: TextStyle(
-                  //           fontWeight: FontWeight.bold,
-                  //           color: Theme.of(context).colorScheme.primary,
-                  //         ),
-                  //       ),
-
-                  //       const SizedBox(
-                  //         height: 5,
-                  //       ),
-
-                  //       Row(
-                  //         children: [
-                  //           Container(
-                  //             width: 1,
-                  //             height: 20,
-                  //             decoration: BoxDecoration(
-                  //                 color: Theme.of(context).colorScheme.primary),
-                  //           ),
-                  //           const SizedBox(
-                  //             width: 15,
-                  //           ),
-                  //           Column(
-                  //             crossAxisAlignment: CrossAxisAlignment.start,
-                  //             children: [
-                  //               Row(
-                  //                 children: [
-                  //                   Icon(
-                  //                     color: Theme.of(context)
-                  //                         .colorScheme
-                  //                         .tertiary,
-                  //                     Icons.countertops,
-                  //                     size: 15,
-                  //                   ),
-                  //                   const SizedBox(
-                  //                     width: 5,
-                  //                   ),
-                  //                   const Text("90% Complete"),
-                  //                 ],
-                  //               ),
-                  //               Row(
-                  //                 children: [
-                  //                   Icon(
-                  //                     color: Theme.of(context)
-                  //                         .colorScheme
-                  //                         .tertiary,
-                  //                     Icons.circle,
-                  //                     size: 15,
-                  //                   ),
-                  //                   const SizedBox(
-                  //                     width: 5,
-                  //                   ),
-                  //                   const Text("13-Dec. 2024")
-                  //                 ],
-                  //               ),
-                  //               const SizedBox(
-                  //                 width: 10,
-                  //               ),
-                  //             ],
-                  //           ),
-                  //         ],
-                  //       ),
-                  //       SizedBox(
-                  //         width: MediaQuery.of(context).size.width * .9,
-                  //         height: 50,
-                  //         child: PoolProgressBar(
-                  //           plan: CoOwnershipPlan(
-                  //               propertyId: "Property001",
-                  //               totalValue: 20000000,
-                  //               numberOfShares: 5,
-                  //               sharePrice: 500000),
-                  //         ),
-                  //       ),
-                  //       // MAJORE SELLING LINES
-                  //     ],
-                  //   ),
-                  // ),
-
                   //P A Y M E N T   P L A N S
 
                   //INSTALMENT PAYMENT
 
-                  // widget.property.installmentPlan == null
-                  //     ? CircularProgressIndicator()
-                  //     : Column(
-                  //         crossAxisAlignment: CrossAxisAlignment.start,
-                  //         children: [
-                  //           Text(
-                  //             "INSTALMENT PAYMENT PLAN",
-                  //             style: TextStyle(
-                  //               fontWeight: FontWeight.bold,
-                  //               color: Theme.of(context).colorScheme.primary,
-                  //             ),
-                  //           ),
-                  //           const SizedBox(
-                  //             height: 10,
-                  //           ),
-                  //           Row(
-                  //             children: [
-                  //               Container(
-                  //                 width: 1,
-                  //                 height: 90,
-                  //                 decoration: BoxDecoration(
-                  //                     color: Theme.of(context)
-                  //                         .colorScheme
-                  //                         .primary),
-                  //               ),
-                  //               const SizedBox(
-                  //                 width: 15,
-                  //               ),
-                  //               Column(
-                  //                 crossAxisAlignment: CrossAxisAlignment.start,
-                  //                 children: [
-                  //                   Row(
-                  //                     children: [
-                  //                       Icon(
-                  //                         color: Theme.of(context)
-                  //                             .colorScheme
-                  //                             .primary,
-                  //                         Icons.calendar_month,
-                  //                         size: 15,
-                  //                       ),
-                  //                       const SizedBox(
-                  //                         width: 5,
-                  //                       ),
-                  //                       Text(
-                  //                           "Next Payment: ${widget.property.installmentPlan!.paymentSchedules[0].toString().split(" ")[0]}")
-                  //                     ],
-                  //                   ),
-                  //                   const SizedBox(
-                  //                     height: 5,
-                  //                   ),
-                  //                   Row(
-                  //                     children: [
-                  //                       Icon(
-                  //                         color: Colors.green,
-                  //                         Icons.paid,
-                  //                         size: 15,
-                  //                       ),
-                  //                       const SizedBox(
-                  //                         width: 5,
-                  //                       ),
-                  //                       Text(
-                  //                         "Total Worth: ₦${widget.property.installmentPlan!.totalCost}",
-                  //                         style: const TextStyle(
-                  //                             fontWeight: FontWeight.normal),
-                  //                       )
-                  //                     ],
-                  //                   ),
-                  //                   const SizedBox(
-                  //                     height: 5,
-                  //                   ),
-                  //                   Row(
-                  //                     children: [
-                  //                       Icon(
-                  //                         color: Theme.of(context)
-                  //                             .colorScheme
-                  //                             .primary,
-                  //                         Icons.payment,
-                  //                         size: 15,
-                  //                       ),
-                  //                       const SizedBox(
-                  //                         width: 5,
-                  //                       ),
-                  //                       Text(
-                  //                         "Paid: ₦${widget.property.installmentPlan!.amountPaid}",
-                  //                         style: const TextStyle(
-                  //                           fontWeight: FontWeight.normal,
-                  //                         ),
-                  //                       )
-                  //                     ],
-                  //                   ),
-                  //                   const SizedBox(
-                  //                     height: 5,
-                  //                   ),
-                  //                   Row(
-                  //                     children: [
-                  //                       Icon(
-                  //                         color: Theme.of(context)
-                  //                             .colorScheme
-                  //                             .primary,
-                  //                         Icons.hourglass_bottom,
-                  //                         size: 15,
-                  //                       ),
-                  //                       const SizedBox(
-                  //                         width: 5,
-                  //                       ),
-                  //                       InstallmentProgress(
-                  //                         total: widget.property
-                  //                             .installmentPlan!.totalCost,
-                  //                         paid: widget.property.installmentPlan!
-                  //                             .amountPaid!,
-                  //                       )
-                  //                     ],
-                  //                   ),
-                  //                 ],
-                  //               ),
-                  //             ],
-                  //           ),
-                  //           SizedBox(
-                  //             height: 20,
-                  //           )
-                  //         ],
-                  //       ),
-
-                  //CO-OWNERSHIP PAYMENT
-
-                  widget.property.coOwnershipPlan == null
-                      ? CircularProgressIndicator()
-                      : Column(
+                  widget.property.installmentPlan != null
+                      ? Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "CO-OWNERSHIP POOLED PAYMENT PLAN",
+                              "INSTALMENT PAYMENT PLAN",
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Theme.of(context).colorScheme.primary,
@@ -777,14 +408,14 @@ class _MyPropsDetailsState extends State<MyPropsDetails> {
                                           color: Theme.of(context)
                                               .colorScheme
                                               .primary,
-                                          Icons.pie_chart,
+                                          Icons.calendar_month,
                                           size: 15,
                                         ),
                                         const SizedBox(
                                           width: 5,
                                         ),
                                         Text(
-                                            "My Share: ${widget.property.coOwnershipPlan!.ownershipShares[0]}")
+                                            "Next Payment: ${widget.property.installmentPlan!.paymentSchedules[0].toString().split(" ")[0]}")
                                       ],
                                     ),
                                     const SizedBox(
@@ -801,7 +432,7 @@ class _MyPropsDetailsState extends State<MyPropsDetails> {
                                           width: 5,
                                         ),
                                         Text(
-                                          "Total Worth: ₦${widget.property.price}",
+                                          "Total Worth: ₦${widget.property.installmentPlan!.totalCost}",
                                           style: const TextStyle(
                                               fontWeight: FontWeight.normal),
                                         )
@@ -823,7 +454,7 @@ class _MyPropsDetailsState extends State<MyPropsDetails> {
                                           width: 5,
                                         ),
                                         Text(
-                                          "Share Price: ₦${widget.property.coOwnershipPlan!.ownershipShares[0].sharePrice}/Shares",
+                                          "Paid: ₦${widget.property.installmentPlan!.amountPaid}",
                                           style: const TextStyle(
                                             fontWeight: FontWeight.normal,
                                           ),
@@ -845,13 +476,12 @@ class _MyPropsDetailsState extends State<MyPropsDetails> {
                                         const SizedBox(
                                           width: 5,
                                         ),
-                                        // PoolProgressBar(plan: widget!.property!.coOwnershipPlan!.ownershipShares[0])
-                                        // InstallmentProgress(
-                                        //   total: widget.property
-                                        //       .installmentPlan!.totalCost,
-                                        //   paid: widget.property.installmentPlan!
-                                        //       .amountPaid!,
-                                        // )
+                                        InstallmentProgress(
+                                          total: widget.property
+                                              .installmentPlan!.totalCost,
+                                          paid: widget.property.installmentPlan!
+                                              .amountPaid!,
+                                        )
                                       ],
                                     ),
                                   ],
@@ -862,7 +492,195 @@ class _MyPropsDetailsState extends State<MyPropsDetails> {
                               height: 20,
                             )
                           ],
-                        ),
+                        )
+                      :
+
+                      //CO-OWNERSHIP PAYMENT
+
+                      widget.property.coOwnershipPlan != null
+                          ? Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "CO-OWNERSHIP POOLED PAYMENT PLAN",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color:
+                                        Theme.of(context).colorScheme.primary,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Row(
+                                  children: [
+                                    Container(
+                                      width: 1,
+                                      height: 90,
+                                      decoration: BoxDecoration(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .primary),
+                                    ),
+                                    const SizedBox(
+                                      width: 15,
+                                    ),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Icon(
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .primary,
+                                              Icons.pie_chart,
+                                              size: 15,
+                                            ),
+                                            const SizedBox(
+                                              width: 5,
+                                            ),
+                                            Text(
+                                                "My Share: ${widget.property.coOwnershipPlan!.ownershipShares[0]}")
+                                          ],
+                                        ),
+                                        const SizedBox(
+                                          height: 5,
+                                        ),
+                                        Row(
+                                          children: [
+                                            Icon(
+                                              color: Colors.green,
+                                              Icons.paid,
+                                              size: 15,
+                                            ),
+                                            const SizedBox(
+                                              width: 5,
+                                            ),
+                                            Text(
+                                              "Total Worth: ₦${widget.property.price}",
+                                              style: const TextStyle(
+                                                  fontWeight:
+                                                      FontWeight.normal),
+                                            )
+                                          ],
+                                        ),
+                                        const SizedBox(
+                                          height: 5,
+                                        ),
+                                        Row(
+                                          children: [
+                                            Icon(
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .primary,
+                                              Icons.payment,
+                                              size: 15,
+                                            ),
+                                            const SizedBox(
+                                              width: 5,
+                                            ),
+                                            Text(
+                                              "Share Price: ₦${widget.property.coOwnershipPlan!.ownershipShares[0].sharePrice}/Shares",
+                                              style: const TextStyle(
+                                                fontWeight: FontWeight.normal,
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                        const SizedBox(
+                                          height: 5,
+                                        ),
+                                        Row(
+                                          children: [
+                                            Icon(
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .primary,
+                                              Icons.hourglass_bottom,
+                                              size: 15,
+                                            ),
+                                            const SizedBox(
+                                              width: 5,
+                                            ),
+                                            Container(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  .7,
+                                              child: PoolProgressBar(
+                                                  property: widget.property),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                )
+                              ],
+                            )
+                          : Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "OUTRIGHT PAYMENT PLAN",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color:
+                                        Theme.of(context).colorScheme.primary,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Row(
+                                  children: [
+                                    Container(
+                                      width: 1,
+                                      height: 20,
+                                      decoration: BoxDecoration(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .primary),
+                                    ),
+                                    const SizedBox(
+                                      width: 15,
+                                    ),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Icon(
+                                              color: Colors.green,
+                                              Icons.paid,
+                                              size: 15,
+                                            ),
+                                            const SizedBox(
+                                              width: 5,
+                                            ),
+                                            Text(
+                                              "Total Worth: ₦${widget.property.price}",
+                                              style: const TextStyle(
+                                                  fontWeight:
+                                                      FontWeight.normal),
+                                            )
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                )
+                              ],
+                            ),
                   //D O C U M E N T A T I O N
                   Text(
                     "WHY SHOULD YOU BUY THIS?",
@@ -970,26 +788,23 @@ class _MyPropsDetailsState extends State<MyPropsDetails> {
         ),
       ),
       bottomNavigationBar: Container(
-        color: Colors.white,
+        decoration: BoxDecoration(
+            color: Colors.white,
+            boxShadow: [BoxShadow(color: Colors.black, blurRadius: 10)]),
         padding: const EdgeInsets.all(16.0),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             AppButton(
                 text: "Contact Agent",
                 width: MediaQuery.of(context).size.width * .4,
                 onPress: () {
-                  HelperFunctions.routePushTo(
-                      OwnershipSlotsPage(
-                        property: widget.property,
-                      ),
-                      context);
+                  // HelperFunctions.routePushTo(
+                  //     OwnershipSlotsPage(
+                  //       property: widget.property,
+                  //     ),
+                  //     context);
                 }),
-            AppButton(
-              text: "Sell",
-              width: MediaQuery.of(context).size.width * .4,
-              onPress: () {},
-              backgroundColor: Colors.grey.shade900,
-            ),
           ],
         ),
       ),

@@ -1,4 +1,7 @@
 import 'dart:async';
+import 'package:salis/salis/props/data/co_ownership.dart';
+import 'package:salis/salis/props/presentation/widgets/pool_progress_bar.dart';
+
 import '../../../../salis/core/utils/helper_functions.dart';
 import '../../../../salis/props/data/property.dart';
 import '../../../../salis/props/presentation/pages/prop_details.dart';
@@ -118,78 +121,150 @@ class _ProductCardState extends State<ProductCard> {
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),
-            const Text(
-              "Chic one-bedroom apartment featuring contemporary design, ample natural light, and prime city accessibility",
+            Text(
+              widget.property.details,
             ),
             const SizedBox(height: 10),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Container(
-                  height: 40,
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                        color: Theme.of(context).colorScheme.onSurface),
-                    borderRadius: BorderRadius.circular(50),
-                  ),
-                  padding: const EdgeInsets.all(10),
-                  child: Text(
-                    "₦${widget.property.price.round().toString()} ",
-                    style: const TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                ),
-                const SizedBox(width: 10),
-                Container(
-                  height: 40,
-                  width: 40,
-                  padding: const EdgeInsets.all(5),
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                        width: 3, color: Theme.of(context).colorScheme.error),
-                    borderRadius: BorderRadius.circular(50),
-                  ),
-                  child: const Center(
-                    child: Text(
-                      "50%",
-                      style:
-                          TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                ),
-                // const SizedBox(width: 10),
-                // FractionPaidProgressBar(
-                //   fractions: [
-                //     FractionPaidData(
-                //       isPaid: true,
-                //       imageUrl: 'assets/profile.png',
-                //       amountPaid: 200000,
-                //       equityOwned: 20.0,
-                //       datePaid: '13 March, 2023',
-                //     ),
-                //     FractionPaidData(
-                //       isPaid: false,
-                //       amountToPay: 300000,
-                //       equityToOwn: 30.0,
-                //     ),
-                //     FractionPaidData(
-                //       isPaid: true,
-                //       imageUrl: 'assets/profile.png',
-                //       amountPaid: 400000,
-                //       equityOwned: 40.0,
-                //       datePaid: '15 March, 2023',
-                //     ),
-                //     FractionPaidData(
-                //       isPaid: false,
-                //       amountToPay: 500000,
-                //       equityToOwn: 50.0,
-                //     ),
-                //   ],
-                // ),
-              ],
-            ),
+
+            // P A Y M E N T   P L A N S
+            //INSTALMENTAL PAYMENT
+            widget.property.installmentPlan != null
+                ? Column(
+                    children: [
+                      const Row(
+                        children: [
+                          Icon(Icons.paid),
+                          Text(
+                            "INSTALMENT",
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 10),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Icon(Icons.donut_large),
+                          Text(
+                            "INST.||",
+                            style: const TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          const Icon(
+                            Icons.attach_money_rounded,
+                            color: Colors.green,
+                          ),
+                          Text(
+                            " ₦${widget.property.price.round().toString()}/",
+                            style:
+                                const TextStyle(fontWeight: FontWeight.normal),
+                          ),
+                          const Icon(
+                            Icons.money_off_sharp,
+                            color: Colors.red,
+                          ),
+                          Text(
+                            " ₦${widget.property.installmentPlan!.paymentAmounts[0].truncateToDouble()}",
+                            style:
+                                const TextStyle(fontWeight: FontWeight.normal),
+                          ),
+                          const SizedBox(width: 10),
+                        ],
+                      ),
+                    ],
+                  )
+                :
+
+                //  CO-OWNERSHIP PAYMENT
+                widget.property.coOwnershipPlan != null
+                    ? Column(
+                        children: [
+                          const Row(
+                            children: [
+                              Icon(Icons.paid),
+                              Text(
+                                "Co-Ownership Plan",
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 10),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Icon(Icons.add_chart_sharp),
+                              const Icon(
+                                Icons.attach_money_rounded,
+                                color: Colors.green,
+                              ),
+                              Text(
+                                " ₦${widget.property.price.round().toString()}/",
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.normal),
+                              ),
+                              const Icon(
+                                Icons.money_off_sharp,
+                                color: Colors.red,
+                              ),
+                              Text(
+                                "₦${widget.property.coOwnershipPlan!.getAvailableShares()[0].sharePrice.toString()}",
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.normal),
+                              ),
+                              const SizedBox(width: 10),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Divider(
+                            thickness: .5,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Container(
+                                width: MediaQuery.of(context).size.width * .8,
+                                child:
+                                    PoolProgressBar(property: widget.property),
+                              )
+                            ],
+                          ),
+                        ],
+                      )
+                    : Column(
+                        children: [
+                          const Row(
+                            children: [
+                              Icon(Icons.paid),
+                              Text(
+                                "Outright Payment",
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 10),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              const Icon(Icons.add_chart_sharp),
+                              const Icon(
+                                Icons.attach_money_rounded,
+                                color: Colors.green,
+                              ),
+                              Text(
+                                " ₦${widget.property.price.round().toString()}",
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.normal),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
             const SizedBox(height: 10),
+            Divider(
+              thickness: .5,
+            ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 AppButton(
                   text: "VIEW Details",
@@ -218,9 +293,9 @@ class _ProductCardState extends State<ProductCard> {
                     ),
                   ),
                 ),
+                const SizedBox(height: 10),
               ],
             ),
-            const SizedBox(height: 10),
           ],
         ),
       ),

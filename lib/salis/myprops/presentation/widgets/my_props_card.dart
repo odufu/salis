@@ -1,9 +1,12 @@
 import 'dart:async';
+import 'package:salis/salis/payment/presentation/pages/co_ownership_payment_summary_page.dart';
+import 'package:salis/salis/payment/presentation/pages/instalment_plan_selection_page.dart';
+
 import '../../../../salis/core/utils/helper_functions.dart';
 import '../../../../salis/core/widgets/app_button.dart';
 import '../../../../salis/myprops/presentation/widgets/buy_share_page.dart';
 import '../../../../salis/myprops/presentation/widgets/my_props_details.dart';
-import '../../../../salis/myprops/presentation/widgets/pay_installment_due_page.dart';
+import '../../../payment/presentation/pages/payment_summary.dart';
 import '../../../../salis/props/data/property.dart';
 import 'package:flutter/material.dart';
 
@@ -285,11 +288,7 @@ class _MyPropsCardState extends State<MyPropsCard> {
                                   width: MediaQuery.of(context).size.width * .8,
                                   height: 40,
                                   child: PoolProgressBar(
-                                    plan: CoOwnershipPlan(
-                                        propertyId: "Prop002",
-                                        totalValue: 200000000,
-                                        numberOfShares: 4,
-                                        sharePrice: 300000),
+                                    property: widget.property,
                                   )),
                             ],
                           ),
@@ -375,7 +374,16 @@ class _MyPropsCardState extends State<MyPropsCard> {
                       text: "Pay Due",
                       onPress: () {
                         HelperFunctions.routePushTo(
-                            PayInstallmentDuePage(property: widget.property),
+                            InstalmentPlanSelectionPage(
+                              title: widget.property.title,
+                              details: widget.property.details,
+                              price: widget.property.price,
+                              closingPeriod: widget
+                                  .property.installmentPlan!.closingPeriod,
+                              minInitialPayment: widget.property
+                                  .installmentPlan!.minimumInitialPayment,
+                              property: widget.property,
+                            ),
                             context);
                       },
                     )
@@ -384,10 +392,8 @@ class _MyPropsCardState extends State<MyPropsCard> {
                           text: "Buy Share",
                           onPress: () {
                             HelperFunctions.routePushTo(
-                                BuySharePage(
-                                  pool: widget.property.coOwnershipPlan!
-                                      .ownershipShares[0],
-                                ),
+                                CoOwnershipPaymentSummaryPage(
+                                    property: widget.property),
                                 context);
                           },
                         )

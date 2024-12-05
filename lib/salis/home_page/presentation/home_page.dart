@@ -3,12 +3,16 @@ import '../../../salis/core/widgets/app_button.dart';
 import '../../../salis/home/presentation/pages/home_page.dart';
 import '../../../salis/props/data/property.dart';
 import '../../../salis/props/presentation/pages/prop_details.dart';
-import '../../../salis/props/presentation/property.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
   MyHomePage({super.key});
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
   final List<Map<String, dynamic>> cartegories = [
     {
       "name": "Home Stay",
@@ -35,6 +39,8 @@ class MyHomePage extends StatelessWidget {
       "icon": Icons.home_repair_service_outlined,
     },
   ];
+
+  final searchedNewProperties = [];
 
   @override
   Widget build(
@@ -229,6 +235,7 @@ class MyHomePage extends StatelessWidget {
                                           children: [
                                             Text(
                                               newProperties[index].title,
+                                              maxLines: 1,
                                               style: TextStyle(
                                                 fontWeight: FontWeight.normal,
                                                 color: Theme.of(context)

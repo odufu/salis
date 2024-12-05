@@ -5,6 +5,8 @@ import '../../../../salis/profile/presentation/profile.dart';
 import '../../../../salis/props/presentation/property.dart';
 import 'package:flutter/material.dart';
 
+import '../../../notification/presentation/pages/notification_drawer.dart';
+
 // ignore: must_be_immutable
 class HomePage extends StatefulWidget {
   int? initialIndex;
@@ -15,6 +17,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   int selectedIndex = 0;
 
   final pages = [
@@ -84,11 +88,15 @@ class _HomePageState extends State<HomePage> {
               borderRadius: BorderRadius.circular(50),
               color: Theme.of(context).colorScheme.surface,
             ),
-            child: IconButton(
-              onPressed: () {},
-              icon: Icon(
-                Icons.notification_add_sharp,
-                color: Theme.of(context).colorScheme.primary,
+            child: Builder(
+              builder: (context) => IconButton(
+                onPressed: () {
+                  Scaffold.of(context).openEndDrawer();
+                },
+                icon: Icon(
+                  Icons.notification_add_sharp,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
               ),
             ),
           ),
@@ -132,6 +140,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
+      endDrawer: NotificationDrawer(scaffoldKey: _scaffoldKey),
     );
   }
 }
