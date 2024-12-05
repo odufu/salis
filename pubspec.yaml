@@ -30,6 +30,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_launcher_icons: ^0.9.2
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -49,6 +50,11 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^4.0.0
 
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/logo.png"  # Make sure this is correct
+ # Set your desired icon image path here
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
@@ -63,6 +69,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
+    - assets/logo.png
     - assets/
 
   # An image asset can refer to one or more resolution-specific "variants", see
