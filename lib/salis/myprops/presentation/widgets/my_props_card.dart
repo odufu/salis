@@ -1,9 +1,15 @@
 import 'dart:async';
 import '../../../../salis/core/utils/helper_functions.dart';
 import '../../../../salis/core/widgets/app_button.dart';
+import '../../../../salis/myprops/presentation/widgets/buy_share_page.dart';
 import '../../../../salis/myprops/presentation/widgets/my_props_details.dart';
+import '../../../../salis/myprops/presentation/widgets/pay_installment_due_page.dart';
 import '../../../../salis/props/data/property.dart';
 import 'package:flutter/material.dart';
+
+import '../../../props/data/co_ownership.dart';
+import '../../../props/presentation/widgets/pool_progress_bar.dart';
+import 'instalment_progress.dart';
 
 class MyPropsCard extends StatefulWidget {
   final Property property;
@@ -138,109 +144,260 @@ class _MyPropsCardState extends State<MyPropsCard> {
             ),
           ),
 
-          // Text Section
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  widget.property.title,
-                  style: const TextStyle(
-                      fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(height: 8),
-                Row(
-                  children: [
-                    Icon(Icons.pie_chart, size: 18, color: Colors.grey[700]),
-                    const SizedBox(width: 8),
-                    Text(
-                        'Ownership: ${(widget.property.price - ((widget.property.instalmentPaid)!.toDouble())) * 100 / widget.property.price}%'),
-                  ],
-                ),
-                const SizedBox(height: 4),
-                Row(
-                  children: [
-                    const Icon(Icons.check_circle,
-                        size: 18, color: Colors.green),
-                    const SizedBox(width: 8),
-                    Text('Total Worth: ₦ ${widget.property.price.round()}'),
-                  ],
-                ),
-                const SizedBox(height: 4),
-                Row(
-                  children: [
-                    const Icon(Icons.lock_outline,
-                        size: 18, color: Colors.grey),
-                    const SizedBox(width: 8),
-                    Text('Status: ${widget.property.isTaken}'),
-                  ],
-                ),
-                const SizedBox(height: 8),
-                Row(
-                  children: [
-                    const Icon(Icons.calendar_today,
-                        size: 18, color: Colors.blue),
-                    const SizedBox(width: 8),
-                    Text(
-                        'Next Payment : ${widget.property.nextPaymentDueDate}'),
-                  ],
-                ),
-                const SizedBox(height: 16),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      children: List.generate(5, (index) {
-                        return Icon(
-                          index < widget.property.rating!.toInt()
-                              ? Icons.star
-                              : Icons.star_border,
-                          color: Colors.orange,
-                          size: 20,
-                        );
-                      }),
-                    ),
-                    Row(
-                      children: [
-                        const Icon(Icons.location_on,
-                            size: 18, color: Colors.red),
-                        const SizedBox(width: 4),
-                        Container(
-                          width: MediaQuery.of(context).size.width * .4,
-                          child: Text(
-                            widget.property.location,
-                            softWrap: true,
-                            style: const TextStyle(fontSize: 14),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
+          //INSTALMENT DETAILS
+
+          widget.property.installmentPlan != null
+              ? Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        widget.property.title,
+                        style: const TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(height: 8),
+                      Row(
+                        children: [
+                          Icon(Icons.loop, size: 18, color: Colors.grey[700]),
+                          const SizedBox(width: 8),
+                          Text(
+                              ' Instalment: ${widget.property.installmentPlan!.paymentSchedules[0].toString().split(" ")[0]}')
+                        ],
+                      ),
+                      const SizedBox(height: 4),
+                      Row(
+                        children: [
+                          const Icon(Icons.paid, size: 18, color: Colors.green),
+                          const SizedBox(width: 8),
+                          Text(
+                              'Total Worth: ₦ ${widget.property.price.round()}'),
+                        ],
+                      ),
+                      const SizedBox(height: 4),
+                      Row(
+                        children: [
+                          const Icon(Icons.check_circle,
+                              size: 18, color: Colors.green),
+                          const SizedBox(width: 8),
+                          Text(
+                              'Amount Paid: ₦ ${widget.property.installmentPlan!.amountPaid!.round()}'),
+                        ],
+                      ),
+                      const SizedBox(height: 4),
+                      Row(
+                        children: [
+                          const Icon(Icons.date_range,
+                              size: 18, color: Colors.blue),
+                          const SizedBox(width: 8),
+                          Text(
+                              'Schedule: ${widget.property.installmentPlan!.paymentAmounts[0]}/${widget.property.installmentPlan!.frequency.toString().split(".")[1]}'),
+                        ],
+                      ),
+                      const SizedBox(height: 16),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              InstallmentProgress(
+                                total:
+                                    widget.property.installmentPlan!.totalCost,
+                                paid: widget
+                                    .property.installmentPlan!.amountPaid!,
+                              )
+                            ],
                           ),
-                        ),
-                      ],
+                          Row(
+                            children: [
+                              const Icon(Icons.location_on,
+                                  size: 18, color: Colors.red),
+                              const SizedBox(width: 4),
+                              Container(
+                                width: MediaQuery.of(context).size.width * .4,
+                                child: Text(
+                                  widget.property.address,
+                                  softWrap: true,
+                                  style: const TextStyle(fontSize: 14),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                )
+              :
+
+              //CO-OWNERSHIP DETAILS
+
+              widget.property.coOwnershipPlan != null
+                  ? Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            widget.property.title,
+                            style: const TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold),
+                          ),
+                          const SizedBox(height: 8),
+                          Row(
+                            children: [
+                              Container(
+                                  width: MediaQuery.of(context).size.width * .8,
+                                  child: Text(
+                                    widget.property.details,
+                                    maxLines: 2,
+                                  ))
+                            ],
+                          ),
+                          const SizedBox(height: 4),
+                          Row(
+                            children: [
+                              const Icon(Icons.paid,
+                                  size: 18, color: Colors.green),
+                              const SizedBox(width: 8),
+                              Text(
+                                  'Total Worth: ₦ ${widget.property.price.round()}'),
+                            ],
+                          ),
+                          const SizedBox(height: 4),
+                          Row(
+                            children: [
+                              const Icon(Icons.paid,
+                                  size: 18, color: Colors.green),
+                              const SizedBox(width: 8),
+                              Text(
+                                  '₦${(widget.property.coOwnershipPlan!.ownershipShares[0].sharePrice)}/Share @ ${(widget.property.coOwnershipPlan!.ownershipShares[0].equityShare)}% Ownership'),
+                            ],
+                          ),
+                          const SizedBox(height: 4),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              SizedBox(
+                                  width: MediaQuery.of(context).size.width * .8,
+                                  height: 40,
+                                  child: PoolProgressBar(
+                                    plan: CoOwnershipPlan(
+                                        propertyId: "Prop002",
+                                        totalValue: 200000000,
+                                        numberOfShares: 4,
+                                        sharePrice: 300000),
+                                  )),
+                            ],
+                          ),
+                        ],
+                      ),
+                    )
+                  :
+                  //OUTRIGHT PAYMENT
+                  Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            widget.property.title,
+                            style: const TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold),
+                          ),
+                          const SizedBox(height: 8),
+                          Row(
+                            children: [
+                              Container(
+                                  width: MediaQuery.of(context).size.width * .8,
+                                  child: Text(
+                                    widget.property.details,
+                                    maxLines: 2,
+                                  ))
+                            ],
+                          ),
+                          const SizedBox(height: 4),
+                          Row(
+                            children: [
+                              const Icon(Icons.paid,
+                                  size: 18, color: Colors.green),
+                              const SizedBox(width: 8),
+                              Text(
+                                  'Total Worth: ₦ ${widget.property.price.round()}'),
+                            ],
+                          ),
+                          const SizedBox(height: 16),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: List.generate(5, (index) {
+                                  return Icon(
+                                    index < widget.property.rating!.toInt()
+                                        ? Icons.star
+                                        : Icons.star_border,
+                                    color: Colors.orange,
+                                    size: 20,
+                                  );
+                                }),
+                              ),
+                              Row(
+                                children: [
+                                  const Icon(Icons.location_on,
+                                      size: 18, color: Colors.red),
+                                  const SizedBox(width: 4),
+                                  Container(
+                                    width:
+                                        MediaQuery.of(context).size.width * .4,
+                                    child: Text(
+                                      widget.property.address,
+                                      softWrap: true,
+                                      style: const TextStyle(fontSize: 14),
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
-                  ],
-                ),
-              ],
-            ),
-          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
+              widget.property.installmentPlan != null
+                  ? AppButton(
+                      text: "Pay Due",
+                      onPress: () {
+                        HelperFunctions.routePushTo(
+                            PayInstallmentDuePage(property: widget.property),
+                            context);
+                      },
+                    )
+                  : widget.property.coOwnershipPlan != null
+                      ? AppButton(
+                          text: "Buy Share",
+                          onPress: () {
+                            HelperFunctions.routePushTo(
+                                BuySharePage(
+                                  pool: widget.property.coOwnershipPlan!
+                                      .ownershipShares[0],
+                                ),
+                                context);
+                          },
+                        )
+                      : SizedBox.shrink(),
               AppButton(
                 text: "View",
                 onPress: () {
                   HelperFunctions.routePushTo(
-                      MyPropsDetails(
-                        property: widget.property,
-                      ),
-                      context);
+                      MyPropsDetails(property: widget.property), context);
                 },
-                width: 100,
-              ),
-              AppButton(
-                text: "Sell",
-                onPress: () {},
-                width: 50,
               ),
             ],
           )

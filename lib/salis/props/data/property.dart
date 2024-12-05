@@ -1,11 +1,16 @@
-import '../../../../salis/props/data/payment_pool.dart';
+import '../../../salis/props/data/cartegory.dart';
+import '../../../salis/props/data/co_ownership.dart';
+import '../../../salis/props/data/installment_plan.dart';
+import '../../../salis/props/data/location.dart';
+import '../../../salis/props/data/payment_pool.dart';
 
 class Property {
   //BASIC DETAILS
   final String title;
   final String details;
-  final String location;
-  final String propType; // Appartment, Store, Office
+  final Location? location;
+  final String address;
+  final Cartegory cartegory; // Appartment, Store, Office
 
   //CREDEBILITY
   int? rating = 0;
@@ -35,11 +40,9 @@ class Property {
   String? pool = "Shared";
 
   //PAYMENTS
-  String? paymentPlan = "Outright"; //Weekly, Monthly, yearly
-  double? instalmentPaid = 0;
-  double? installmentUnit = 0;
-  String? nextPaymentDueDate;
-  List<PaymentPool>? pools = [];
+  double? outrightPlan; //Full Payment,
+  InstallmentPlan? installmentPlan; //Installment Plan
+  CoOwnershipPlan? coOwnershipPlan; //change it to Id of coOwnership Plan
 
   //OFFICIAL DOCUMENTS
   bool? registeredSurvey = true;
@@ -55,9 +58,9 @@ class Property {
     required this.title,
     required this.price,
     required this.details,
-    required this.location,
-    required this.propType,
-    this.isPooled,
+    this.location,
+    required this.address,
+    required this.cartegory,
     this.isTaken,
 
     //CREDEBILITY
@@ -76,11 +79,9 @@ class Property {
     this.bathrooms,
 
     //PAYMENTS
-    this.paymentPlan,
-    this.instalmentPaid,
-    this.installmentUnit,
-    this.nextPaymentDueDate,
-    this.pools,
+    this.installmentPlan,
+    this.coOwnershipPlan,
+    this.outrightPlan,
 
     //AMENITIES
     this.packingSpace,
@@ -100,541 +101,79 @@ class Property {
 
 List<Property> myProperties = [
   Property(
-    title: "3- Bed, Semi Detached",
-    details:
-        "The very best of comfort in homes as engeneered with the mindset of reliability and maximum comfort",
-    price: 2000000,
-    location: "Salis Court, Gwagwalada, central area",
-    propType: "Home Stead",
-    images: [
-      "assets/images/props4.jpg",
-      "assets/images/props6.jpg",
-      "assets/images/props7.jpg",
-      "assets/images/props8.jpg",
-      "assets/images/props9.jpg",
-      "assets/images/props11.jpg",
-      "assets/images/props12.jpg",
-    ],
-    video: "assets/images/propsvideo.mp4",
-    siteMap: "assets/images/map.jpg",
-    housePlan: "assets/images/plan.jpg",
-    eletricity: true,
-    security: true,
-    bedrooms: 4,
-    bathrooms: 5,
-    water: true,
-
-    //CREDIBILITY
-    rating: 4,
-    comments: ["The Best Single detarched house i have seen"],
-    //PAYMENT
-    paymentPlan: "Monthly",
-    instalmentPaid: 25000,
-    installmentUnit: 25000,
-    isTaken: true,
-    nextPaymentDueDate: DateTime(2019, 12, 30, 20, 10, 30).toString(),
-    isPooled: false,
-  ),
-  Property(
-    title: "Semi Detached Home",
-    details:
-        "Immerse yourself in luxury with this mordern apartment featuring spacious rooms, top-notch amenities, and breathtaking views. Ideal for those seeking a blend of comfort and sophistication",
-    price: 70000000,
-    location: "Salis Court, Gwagwalada, central area",
-    propType: "Apartment",
-    images: [
-      "assets/images/props16.jpg",
-      "assets/images/props17.jpg",
-      "assets/images/props18.jpg",
-      "assets/images/props12.jpg",
-      "assets/images/props4.jpg",
-      "assets/images/props7.jpg",
-      "assets/images/props8.jpg",
-    ],
-    video: "assets/images/propsvideo.mp4",
-    siteMap: "assets/images/map.jpg",
-    housePlan: "assets/images/plan.jpg",
-    eletricity: true,
-    security: true,
-    bedrooms: 4,
-    bathrooms: 5,
-    water: true,
-
-    //CREDIBILITY
-    rating: 4,
-    comments: ["The Best Single detarched house i have seen"],
-    //CREDEBILITY
-
-    //PAYMENT
-    paymentPlan: "Weekly",
-    instalmentPaid: 60000000,
-    installmentUnit: 25000,
-    isTaken: true,
-    nextPaymentDueDate: DateTime(2019, 12, 30, 20, 10, 30).toString(),
-    isPooled: false,
-  ),
-  Property(
-    title: "Self Contain-Hostel",
-    details:
-        "The very best of comfort in homes as engeneered with the mindset of reliability and maximum comfort",
-    price: 2000000,
-    location: "Salis Court, Gwagwalada, central area",
-    propType: "Home Stead",
-    images: [
-      "assets/images/props4.jpg",
-      "assets/images/props6.jpg",
-      "assets/images/props7.jpg",
-      "assets/images/props8.jpg",
-      "assets/images/props9.jpg",
-      "assets/images/props11.jpg",
-      "assets/images/props12.jpg",
-    ],
-    video: "assets/images/propsvideo.mp4",
-    siteMap: "assets/images/map.jpg",
-    housePlan: "assets/images/plan.jpg",
-    eletricity: true,
-    security: true,
-    bedrooms: 4,
-    bathrooms: 5,
-    water: true,
-
-    //CREDIBILITY
-    rating: 4,
-    comments: ["The Best Single detarched house i have seen"],
-    //CREDEBILITY
-
-    //PAYMENT
-    paymentPlan: "Monthly",
-    instalmentPaid: 25000,
-    installmentUnit: 25000,
-    isTaken: true,
-    nextPaymentDueDate: DateTime(2019, 12, 30, 20, 10, 30).toString(),
-    isPooled: false,
-  ),
-  Property(
-    title: "Salis Homes Stead",
-    details:
-        "The very best of comfort in homes as engeneered with the mindset of reliability and maximum comfort",
-    price: 2000000,
-    location: "Salis Court, Gwagwalada, central area",
-    propType: "Home Stead",
-    images: [
-      "assets/images/props4.jpg",
-      "assets/images/props6.jpg",
-      "assets/images/props7.jpg",
-      "assets/images/props8.jpg",
-      "assets/images/props9.jpg",
-      "assets/images/props11.jpg",
-      "assets/images/props12.jpg",
-    ],
-    video: "assets/images/propsvideo.mp4",
-    siteMap: "assets/images/map.jpg",
-    housePlan: "assets/images/plan.jpg",
-    eletricity: true,
-    security: true,
-    bedrooms: 4,
-    bathrooms: 5,
-    water: true,
-
-    //CREDIBILITY
-    rating: 4,
-    comments: ["The Best Single detarched house i have seen"],
-    //CREDEBILITY
-
-    //PAYMENT
-    paymentPlan: "Monthly",
-    instalmentPaid: 25000,
-    installmentUnit: 25000,
-    isTaken: true,
-    nextPaymentDueDate: DateTime(2019, 12, 30, 20, 10, 30).toString(),
-    isPooled: false,
-  ),
-  Property(
-    title: "Event Hall: 300 Capacity",
-    details:
-        "The very best of comfort in homes as engeneered with the mindset of reliability and maximum comfort",
-    price: 2000000,
-    location: "Salis Court, Gwagwalada, central area",
-    propType: "Home Stead",
-    images: [
-      "assets/images/props4.jpg",
-      "assets/images/props6.jpg",
-      "assets/images/props7.jpg",
-      "assets/images/props8.jpg",
-      "assets/images/props9.jpg",
-      "assets/images/props11.jpg",
-      "assets/images/props12.jpg",
-    ],
-    video: "assets/images/propsvideo.mp4",
-    siteMap: "assets/images/map.jpg",
-    housePlan: "assets/images/plan.jpg",
-    eletricity: true,
-    security: true,
-    bedrooms: 4,
-    bathrooms: 5,
-    water: true,
-
-    //CREDIBILITY
-    rating: 4,
-    comments: ["The Best Single detarched house i have seen"],
-    //CREDEBILITY
-
-    //PAYMENT
-    paymentPlan: "Monthly",
-    instalmentPaid: 25000,
-    installmentUnit: 25000,
-    isTaken: true,
-    nextPaymentDueDate: DateTime(2019, 12, 30, 20, 10, 30).toString(),
-    isPooled: false,
-  ),
-  Property(
-    title: "Salis Homes Stead",
-    details:
-        "The very best of comfort in homes as engeneered with the mindset of reliability and maximum comfort",
-    price: 2000000,
-    location: "Salis Court, Gwagwalada, central area",
-    propType: "Home Stead",
-    images: [
-      "assets/images/props4.jpg",
-      "assets/images/props6.jpg",
-      "assets/images/props7.jpg",
-      "assets/images/props8.jpg",
-      "assets/images/props9.jpg",
-      "assets/images/props11.jpg",
-      "assets/images/props12.jpg",
-    ],
-    video: "assets/images/propsvideo.mp4",
-    siteMap: "assets/images/map.jpg",
-    housePlan: "assets/images/plan.jpg",
-    eletricity: true,
-    security: true,
-    bedrooms: 4,
-    bathrooms: 5,
-    water: true,
-
-    //CREDIBILITY
-    rating: 4,
-    comments: ["The Best Single detarched house i have seen"],
-    //CREDEBILITY
-
-    //PAYMENT
-    paymentPlan: "Monthly",
-    instalmentPaid: 25000,
-    installmentUnit: 25000,
-    isTaken: true,
-    nextPaymentDueDate: DateTime(2019, 12, 30, 20, 10, 30).toString(),
-    isPooled: false,
-  ),
-  Property(
-    title: "Land for 4-Bed Duplex",
-    details:
-        "The very best of comfort in homes as engeneered with the mindset of reliability and maximum comfort",
-    price: 2000000,
-    location: "Salis Court, Gwagwalada, central area",
-    propType: "Home Stead",
-    images: [
-      "assets/images/props4.jpg",
-      "assets/images/props6.jpg",
-      "assets/images/props7.jpg",
-      "assets/images/props8.jpg",
-      "assets/images/props9.jpg",
-      "assets/images/props11.jpg",
-      "assets/images/props12.jpg",
-    ],
-    video: "assets/images/propsvideo.mp4",
-    siteMap: "assets/images/map.jpg",
-    housePlan: "assets/images/plan.jpg",
-    eletricity: true,
-    security: true,
-    bedrooms: 4,
-    bathrooms: 5,
-    water: true,
-
-    //CREDIBILITY
-    rating: 4,
-    comments: ["The Best Single detarched house i have seen"],
-    //CREDEBILITY
-
-    //PAYMENT
-    paymentPlan: "Monthly",
-    instalmentPaid: 25000,
-    installmentUnit: 25000,
-    isTaken: true,
-    nextPaymentDueDate: DateTime(2019, 12, 30, 20, 10, 30).toString(),
-    isPooled: false,
-  ),
-  Property(
-    title: "5-Bed Flat",
-    details:
-        "The very best of comfort in homes as engeneered with the mindset of reliability and maximum comfort",
-    price: 2000000,
-    location: "Salis Court, Gwagwalada, central area",
-    propType: "Home Stead",
-    images: [
-      "assets/images/props4.jpg",
-      "assets/images/props6.jpg",
-      "assets/images/props7.jpg",
-      "assets/images/props8.jpg",
-      "assets/images/props9.jpg",
-      "assets/images/props11.jpg",
-      "assets/images/props12.jpg",
-    ],
-    video: "assets/images/propsvideo.mp4",
-    siteMap: "assets/images/map.jpg",
-    housePlan: "assets/images/plan.jpg",
-    eletricity: true,
-    security: true,
-    bedrooms: 4,
-    bathrooms: 5,
-    water: true,
-
-    //CREDIBILITY
-    rating: 4,
-    comments: ["The Best Single detarched house i have seen"],
-    //CREDEBILITY
-
-    //PAYMENT
-    paymentPlan: "Monthly",
-    instalmentPaid: 25000,
-    installmentUnit: 25000,
-    isTaken: true,
-    nextPaymentDueDate: DateTime(2019, 12, 30, 20, 10, 30).toString(),
-    isPooled: false,
-  ),
-  Property(
-    title: "Salis Homes Stead",
-    details:
-        "The very best of comfort in homes as engeneered with the mindset of reliability and maximum comfort",
-    price: 2000000,
-    location: "Salis Court, Gwagwalada, central area",
-    propType: "Home Stead",
-    images: [
-      "assets/images/props4.jpg",
-      "assets/images/props6.jpg",
-      "assets/images/props7.jpg",
-      "assets/images/props8.jpg",
-      "assets/images/props9.jpg",
-      "assets/images/props11.jpg",
-      "assets/images/props12.jpg",
-    ],
-    video: "assets/images/propsvideo.mp4",
-    siteMap: "assets/images/map.jpg",
-    housePlan: "assets/images/plan.jpg",
-    eletricity: true,
-    security: true,
-    bedrooms: 4,
-    bathrooms: 5,
-    water: true,
-
-    //CREDIBILITY
-    rating: 4,
-    comments: ["The Best Single detarched house i have seen"],
-    //CREDEBILITY
-
-    //PAYMENT
-    paymentPlan: "Monthly",
-    instalmentPaid: 25000,
-    installmentUnit: 25000,
-    isTaken: true,
-    nextPaymentDueDate: DateTime(2019, 12, 30, 20, 10, 30).toString(),
-    isPooled: false,
-  ),
-  Property(
-    title: "Salis Homes Stead",
-    details:
-        "The very best of comfort in homes as engeneered with the mindset of reliability and maximum comfort",
-    price: 2000000,
-    location: "Salis Court, Gwagwalada, central area",
-    propType: "Home Stead",
-    images: [
-      "assets/images/props4.jpg",
-      "assets/images/props6.jpg",
-      "assets/images/props7.jpg",
-      "assets/images/props8.jpg",
-      "assets/images/props9.jpg",
-      "assets/images/props11.jpg",
-      "assets/images/props12.jpg",
-    ],
-    video: "assets/images/propsvideo.mp4",
-    siteMap: "assets/images/map.jpg",
-    housePlan: "assets/images/plan.jpg",
-    eletricity: true,
-    security: true,
-    bedrooms: 4,
-    bathrooms: 5,
-    water: true,
-
-    //CREDIBILITY
-    rating: 4,
-    comments: ["The Best Single detarched house i have seen"],
-    //CREDEBILITY
-
-    //PAYMENT
-    paymentPlan: "Monthly",
-    instalmentPaid: 25000,
-    installmentUnit: 25000,
-    isTaken: true,
-    nextPaymentDueDate: DateTime(2019, 12, 30, 20, 10, 30).toString(),
-    isPooled: false,
-  ),
-  Property(
-    title: "Salis Homes Stead",
-    details:
-        "The very best of comfort in homes as engeneered with the mindset of reliability and maximum comfort",
-    price: 2000000,
-    location: "Salis Court, Gwagwalada, central area",
-    propType: "Home Stead",
-    images: [
-      "assets/images/props4.jpg",
-      "assets/images/props6.jpg",
-      "assets/images/props7.jpg",
-      "assets/images/props8.jpg",
-      "assets/images/props9.jpg",
-      "assets/images/props11.jpg",
-      "assets/images/props12.jpg",
-    ],
-    video: "assets/images/propsvideo.mp4",
-    siteMap: "assets/images/map.jpg",
-    housePlan: "assets/images/plan.jpg",
-    eletricity: true,
-    security: true,
-    bedrooms: 4,
-    bathrooms: 5,
-    water: true,
-
-    //CREDIBILITY
-    rating: 4,
-    comments: ["The Best Single detarched house i have seen"],
-    //CREDEBILITY
-
-    //PAYMENT
-    paymentPlan: "Monthly",
-    instalmentPaid: 25000,
-    installmentUnit: 25000,
-    isTaken: true,
-    nextPaymentDueDate: DateTime(2019, 12, 30, 20, 10, 30).toString(),
-    isPooled: false,
-  ),
-  Property(
-    title: "Salis Homes Stead",
-    details:
-        "The very best of comfort in homes as engeneered with the mindset of reliability and maximum comfort",
-    price: 2000000,
-    location: "Salis Court, Gwagwalada, central area",
-    propType: "Home Stead",
-    images: [
-      "assets/images/props4.jpg",
-      "assets/images/props6.jpg",
-      "assets/images/props7.jpg",
-      "assets/images/props8.jpg",
-      "assets/images/props9.jpg",
-      "assets/images/props11.jpg",
-      "assets/images/props12.jpg",
-    ],
-    video: "assets/images/propsvideo.mp4",
-    siteMap: "assets/images/map.jpg",
-    housePlan: "assets/images/plan.jpg",
-    eletricity: true,
-    security: true,
-    bedrooms: 4,
-    bathrooms: 5,
-    water: true,
-
-    //CREDIBILITY
-    rating: 4,
-    comments: ["The Best Single detarched house i have seen"],
-    //CREDEBILITY
-
-    //PAYMENT
-    paymentPlan: "Monthly",
-    instalmentPaid: 25000,
-    installmentUnit: 25000,
-    isTaken: true,
-    nextPaymentDueDate: DateTime(2019, 12, 30, 20, 10, 30).toString(),
-    isPooled: false,
-  ),
-  Property(
-    title: "Salis Homes Stead",
-    details:
-        "The very best of comfort in homes as engeneered with the mindset of reliability and maximum comfort",
-    price: 2000000,
-    location: "Salis Court, Gwagwalada, central area",
-    propType: "Home Stead",
-    images: [
-      "assets/images/props4.jpg",
-      "assets/images/props6.jpg",
-      "assets/images/props7.jpg",
-      "assets/images/props8.jpg",
-      "assets/images/props9.jpg",
-      "assets/images/props11.jpg",
-      "assets/images/props12.jpg",
-    ],
-    video: "assets/images/propsvideo.mp4",
-    siteMap: "assets/images/map.jpg",
-    housePlan: "assets/images/plan.jpg",
-    eletricity: true,
-    security: true,
-    bedrooms: 4,
-    bathrooms: 5,
-    water: true,
-
-    //CREDIBILITY
-    rating: 4,
-    comments: ["The Best Single detarched house i have seen"],
-    //CREDEBILITY
-
-    //PAYMENT
-    paymentPlan: "Monthly",
-    instalmentPaid: 25000,
-    installmentUnit: 25000,
-    isTaken: true,
-    nextPaymentDueDate: DateTime(2019, 12, 30, 20, 10, 30).toString(),
-    isPooled: false,
-  ),
-];
-
-List<Property> newProperties = [
-  Property(
-    title: "Land for 4-Bed Duplex",
-    details:
-        "The very best of comfort in homes as engeneered with the mindset of reliability and maximum comfort",
-    price: 2000000,
-    location: "Salis Court, Gwagwalada, central area",
-    propType: "Home Stead",
-    images: [
-      "assets/images/props2.jpg",
-      "assets/images/props6.jpg",
-      "assets/images/props7.jpg",
-      "assets/images/props8.jpg",
-      "assets/images/props9.jpg",
-      "assets/images/props11.jpg",
-      "assets/images/props12.jpg",
-    ],
-    video: "assets/images/propsvideo.mp4",
-    siteMap: "assets/images/map.jpg",
-    housePlan: "assets/images/plan.jpg",
-    eletricity: true,
-    security: true,
-    bedrooms: 4,
-    bathrooms: 5,
-    water: true,
-
-    //CREDIBILITY
-    rating: 4,
-    comments: ["The Best Single detarched house i have seen"],
-    //CREDEBILITY
-
-    //PAYMENT
-    isTaken: false,
-    isPooled: false,
-  ),
-  Property(
-      title: "Land for 4-Bed Duplex",
+      title: "3- Bed, Semi Detached",
       details:
           "The very best of comfort in homes as engeneered with the mindset of reliability and maximum comfort",
       price: 2000000,
-      location: "Salis Court, Gwagwalada, central area",
-      propType: "Home Stead",
+      address: "Salis Court, Gwagwalada, central area",
+      cartegory: Cartegory.homes,
+      images: [
+        "assets/images/props4.jpg",
+        "assets/images/props6.jpg",
+        "assets/images/props7.jpg",
+        "assets/images/props8.jpg",
+        "assets/images/props9.jpg",
+        "assets/images/props11.jpg",
+        "assets/images/props12.jpg",
+      ],
+      video: "assets/images/propsvideo.mp4",
+      siteMap: "assets/images/map.jpg",
+      housePlan: "assets/images/plan.jpg",
+      eletricity: true,
+      security: true,
+      bedrooms: 4,
+      bathrooms: 5,
+      water: true,
+
+      //CREDIBILITY
+      rating: 4,
+      comments: ["The Best Single detarched house i have seen"],
+      //PAYMENT
+      installmentPlan: InstallmentPlan(
+        amountPaid: 500000,
+        totalCost: 2000000,
+        initialPayment: 500000,
+        frequency: PaymentFrequency.monthly,
+      )),
+  Property(
+      title: "Semi Detached Home",
+      details:
+          "Immerse yourself in luxury with this mordern apartment featuring spacious rooms, top-notch amenities, and breathtaking views. Ideal for those seeking a blend of comfort and sophistication",
+      price: 70000000,
+      address: "Salis Court, Gwagwalada, central area",
+      cartegory: Cartegory.homes,
+      images: [
+        "assets/images/props16.jpg",
+        "assets/images/props17.jpg",
+        "assets/images/props18.jpg",
+        "assets/images/props12.jpg",
+        "assets/images/props4.jpg",
+        "assets/images/props7.jpg",
+        "assets/images/props8.jpg",
+      ],
+      video: "assets/images/propsvideo.mp4",
+      siteMap: "assets/images/map.jpg",
+      housePlan: "assets/images/plan.jpg",
+      eletricity: true,
+      security: true,
+      bedrooms: 4,
+      bathrooms: 5,
+      water: true,
+
+      //CREDIBILITY
+      rating: 4,
+      comments: ["The Best Single detarched house i have seen"],
+      //CREDEBILITY
+
+      //PAYMENT
+      outrightPlan: 2000000),
+  Property(
+      title: "Self Contain-Hostel",
+      details:
+          "The very best of comfort in homes as engeneered with the mindset of reliability and maximum comfort",
+      price: 2000000,
+      address: "Salis Court, Gwagwalada, central area",
+      cartegory: Cartegory.homes,
       images: [
         "assets/images/props4.jpg",
         "assets/images/props6.jpg",
@@ -659,16 +198,436 @@ List<Property> newProperties = [
       //CREDEBILITY
 
       //PAYMENT
-      isTaken: false,
-      isPooled: true,
-      pools: dummyPools),
+      coOwnershipPlan: CoOwnershipPlan(
+        propertyId: "propertyId",
+        totalValue: 2000000,
+        numberOfShares: 5,
+        sharePrice: 400000,
+      )),
+  Property(
+    title: "Salis Homes Stead",
+    details:
+        "The very best of comfort in homes as engeneered with the mindset of reliability and maximum comfort",
+    price: 2000000,
+    address: "Salis Court, Gwagwalada, central area",
+    cartegory: Cartegory.homes,
+    images: [
+      "assets/images/props4.jpg",
+      "assets/images/props6.jpg",
+      "assets/images/props7.jpg",
+      "assets/images/props8.jpg",
+      "assets/images/props9.jpg",
+      "assets/images/props11.jpg",
+      "assets/images/props12.jpg",
+    ],
+    video: "assets/images/propsvideo.mp4",
+    siteMap: "assets/images/map.jpg",
+    housePlan: "assets/images/plan.jpg",
+    eletricity: true,
+    security: true,
+    bedrooms: 4,
+    bathrooms: 5,
+    water: true,
+
+    //CREDIBILITY
+    rating: 4,
+    comments: ["The Best Single detarched house i have seen"],
+    //CREDEBILITY
+
+    //PAYMENT
+    installmentPlan: null,
+    isTaken: true,
+  ),
+  Property(
+    title: "Event Hall: 300 Capacity",
+    details:
+        "The very best of comfort in homes as engeneered with the mindset of reliability and maximum comfort",
+    price: 2000000,
+    address: "Salis Court, Gwagwalada, central area",
+    cartegory: Cartegory.homes,
+    images: [
+      "assets/images/props4.jpg",
+      "assets/images/props6.jpg",
+      "assets/images/props7.jpg",
+      "assets/images/props8.jpg",
+      "assets/images/props9.jpg",
+      "assets/images/props11.jpg",
+      "assets/images/props12.jpg",
+    ],
+    video: "assets/images/propsvideo.mp4",
+    siteMap: "assets/images/map.jpg",
+    housePlan: "assets/images/plan.jpg",
+    eletricity: true,
+    security: true,
+    bedrooms: 4,
+    bathrooms: 5,
+    water: true,
+
+    //CREDIBILITY
+    rating: 4,
+    comments: ["The Best Single detarched house i have seen"],
+    //CREDEBILITY
+
+    //PAYMENT
+    coOwnershipPlan: CoOwnershipPlan(
+        propertyId: "Props001",
+        totalValue: 20000000,
+        numberOfShares: 6,
+        sharePrice: 20),
+
+    isTaken: true,
+  ),
+  Property(
+    title: "Salis Homes Stead",
+    details:
+        "The very best of comfort in homes as engeneered with the mindset of reliability and maximum comfort",
+    price: 2000000,
+    address: "Salis Court, Gwagwalada, central area",
+    cartegory: Cartegory.homes,
+    images: [
+      "assets/images/props4.jpg",
+      "assets/images/props6.jpg",
+      "assets/images/props7.jpg",
+      "assets/images/props8.jpg",
+      "assets/images/props9.jpg",
+      "assets/images/props11.jpg",
+      "assets/images/props12.jpg",
+    ],
+    video: "assets/images/propsvideo.mp4",
+    siteMap: "assets/images/map.jpg",
+    housePlan: "assets/images/plan.jpg",
+    eletricity: true,
+    security: true,
+    bedrooms: 4,
+    bathrooms: 5,
+    water: true,
+
+    //CREDIBILITY
+    rating: 4,
+    comments: ["The Best Single detarched house i have seen"],
+    //CREDEBILITY
+
+    //PAYMENT
+
+    isTaken: true,
+  ),
   Property(
     title: "Land for 4-Bed Duplex",
     details:
         "The very best of comfort in homes as engeneered with the mindset of reliability and maximum comfort",
     price: 2000000,
-    location: "Salis Court, Gwagwalada, central area",
-    propType: "Home Stead",
+    address: "Salis Court, Gwagwalada, central area",
+    cartegory: Cartegory.homes,
+    images: [
+      "assets/images/props4.jpg",
+      "assets/images/props6.jpg",
+      "assets/images/props7.jpg",
+      "assets/images/props8.jpg",
+      "assets/images/props9.jpg",
+      "assets/images/props11.jpg",
+      "assets/images/props12.jpg",
+    ],
+    video: "assets/images/propsvideo.mp4",
+    siteMap: "assets/images/map.jpg",
+    housePlan: "assets/images/plan.jpg",
+    eletricity: true,
+    security: true,
+    bedrooms: 4,
+    bathrooms: 5,
+    water: true,
+
+    //CREDIBILITY
+    rating: 4,
+    comments: ["The Best Single detarched house i have seen"],
+    //CREDEBILITY
+
+    //PAYMENT
+
+    isTaken: true,
+  ),
+  Property(
+    title: "5-Bed Flat",
+    details:
+        "The very best of comfort in homes as engeneered with the mindset of reliability and maximum comfort",
+    price: 2000000,
+    address: "Salis Court, Gwagwalada, central area",
+    cartegory: Cartegory.homes,
+    images: [
+      "assets/images/props4.jpg",
+      "assets/images/props6.jpg",
+      "assets/images/props7.jpg",
+      "assets/images/props8.jpg",
+      "assets/images/props9.jpg",
+      "assets/images/props11.jpg",
+      "assets/images/props12.jpg",
+    ],
+    video: "assets/images/propsvideo.mp4",
+    siteMap: "assets/images/map.jpg",
+    housePlan: "assets/images/plan.jpg",
+    eletricity: true,
+    security: true,
+    bedrooms: 4,
+    bathrooms: 5,
+    water: true,
+
+    //CREDIBILITY
+    rating: 4,
+    comments: ["The Best Single detarched house i have seen"],
+    //CREDEBILITY
+
+    //PAYMENT
+
+    isTaken: true,
+  ),
+  Property(
+    title: "Salis Homes Stead",
+    details:
+        "The very best of comfort in homes as engeneered with the mindset of reliability and maximum comfort",
+    price: 2000000,
+    address: "Salis Court, Gwagwalada, central area",
+    cartegory: Cartegory.homes,
+    images: [
+      "assets/images/props4.jpg",
+      "assets/images/props6.jpg",
+      "assets/images/props7.jpg",
+      "assets/images/props8.jpg",
+      "assets/images/props9.jpg",
+      "assets/images/props11.jpg",
+      "assets/images/props12.jpg",
+    ],
+    video: "assets/images/propsvideo.mp4",
+    siteMap: "assets/images/map.jpg",
+    housePlan: "assets/images/plan.jpg",
+    eletricity: true,
+    security: true,
+    bedrooms: 4,
+    bathrooms: 5,
+    water: true,
+
+    //CREDIBILITY
+    rating: 4,
+    comments: ["The Best Single detarched house i have seen"],
+    //CREDEBILITY
+
+    //PAYMENT
+
+    isTaken: true,
+  ),
+  Property(
+    title: "Salis Homes Stead",
+    details:
+        "The very best of comfort in homes as engeneered with the mindset of reliability and maximum comfort",
+    price: 2000000,
+    address: "Salis Court, Gwagwalada, central area",
+    cartegory: Cartegory.homes,
+    images: [
+      "assets/images/props4.jpg",
+      "assets/images/props6.jpg",
+      "assets/images/props7.jpg",
+      "assets/images/props8.jpg",
+      "assets/images/props9.jpg",
+      "assets/images/props11.jpg",
+      "assets/images/props12.jpg",
+    ],
+    video: "assets/images/propsvideo.mp4",
+    siteMap: "assets/images/map.jpg",
+    housePlan: "assets/images/plan.jpg",
+    eletricity: true,
+    security: true,
+    bedrooms: 4,
+    bathrooms: 5,
+    water: true,
+
+    //CREDIBILITY
+    rating: 4,
+    comments: ["The Best Single detarched house i have seen"],
+    //CREDEBILITY
+
+    //PAYMENT
+
+    isTaken: true,
+  ),
+  Property(
+    title: "Salis Homes Stead",
+    details:
+        "The very best of comfort in homes as engeneered with the mindset of reliability and maximum comfort",
+    price: 2000000,
+    address: "Salis Court, Gwagwalada, central area",
+    cartegory: Cartegory.homes,
+    images: [
+      "assets/images/props4.jpg",
+      "assets/images/props6.jpg",
+      "assets/images/props7.jpg",
+      "assets/images/props8.jpg",
+      "assets/images/props9.jpg",
+      "assets/images/props11.jpg",
+      "assets/images/props12.jpg",
+    ],
+    video: "assets/images/propsvideo.mp4",
+    siteMap: "assets/images/map.jpg",
+    housePlan: "assets/images/plan.jpg",
+    eletricity: true,
+    security: true,
+    bedrooms: 4,
+    bathrooms: 5,
+    water: true,
+
+    //CREDIBILITY
+    rating: 4,
+    comments: ["The Best Single detarched house i have seen"],
+    //CREDEBILITY
+
+    //PAYMENT
+
+    isTaken: true,
+  ),
+  Property(
+    title: "Salis Homes Stead",
+    details:
+        "The very best of comfort in homes as engeneered with the mindset of reliability and maximum comfort",
+    price: 2000000,
+    address: "Salis Court, Gwagwalada, central area",
+    cartegory: Cartegory.homes,
+    images: [
+      "assets/images/props4.jpg",
+      "assets/images/props6.jpg",
+      "assets/images/props7.jpg",
+      "assets/images/props8.jpg",
+      "assets/images/props9.jpg",
+      "assets/images/props11.jpg",
+      "assets/images/props12.jpg",
+    ],
+    video: "assets/images/propsvideo.mp4",
+    siteMap: "assets/images/map.jpg",
+    housePlan: "assets/images/plan.jpg",
+    eletricity: true,
+    security: true,
+    bedrooms: 4,
+    bathrooms: 5,
+    water: true,
+
+    //CREDIBILITY
+    rating: 4,
+    comments: ["The Best Single detarched house i have seen"],
+    //CREDEBILITY
+
+    //PAYMENT
+
+    isTaken: true,
+  ),
+  Property(
+    title: "Salis Homes Stead",
+    details:
+        "The very best of comfort in homes as engeneered with the mindset of reliability and maximum comfort",
+    price: 2000000,
+    address: "Salis Court, Gwagwalada, central area",
+    cartegory: Cartegory.homes,
+    images: [
+      "assets/images/props4.jpg",
+      "assets/images/props6.jpg",
+      "assets/images/props7.jpg",
+      "assets/images/props8.jpg",
+      "assets/images/props9.jpg",
+      "assets/images/props11.jpg",
+      "assets/images/props12.jpg",
+    ],
+    video: "assets/images/propsvideo.mp4",
+    siteMap: "assets/images/map.jpg",
+    housePlan: "assets/images/plan.jpg",
+    eletricity: true,
+    security: true,
+    bedrooms: 4,
+    bathrooms: 5,
+    water: true,
+
+    //CREDIBILITY
+    rating: 4,
+    comments: ["The Best Single detarched house i have seen"],
+    //CREDEBILITY
+
+    //PAYMENT
+
+    isTaken: true,
+  ),
+];
+
+List<Property> newProperties = [
+  Property(
+      title: "Land for 4-Bed Duplex",
+      details:
+          "The very best of comfort in homes as engeneered with the mindset of reliability and maximum comfort",
+      price: 2000000,
+      address: "Salis Court, Gwagwalada, central area",
+      cartegory: Cartegory.homes,
+      images: [
+        "assets/images/props2.jpg",
+        "assets/images/props6.jpg",
+        "assets/images/props7.jpg",
+        "assets/images/props8.jpg",
+        "assets/images/props9.jpg",
+        "assets/images/props11.jpg",
+        "assets/images/props12.jpg",
+      ],
+      video: "assets/images/propsvideo.mp4",
+      siteMap: "assets/images/map.jpg",
+      housePlan: "assets/images/plan.jpg",
+      eletricity: true,
+      security: true,
+      bedrooms: 4,
+      bathrooms: 5,
+      water: true,
+
+      //CREDIBILITY
+      rating: 4,
+      comments: ["The Best Single detarched house i have seen"],
+      //CREDEBILITY
+
+      //PAYMENT
+      coOwnershipPlan: CoOwnershipPlan(
+        propertyId: "propertyId",
+        totalValue: 2000000,
+        numberOfShares: 6,
+        sharePrice: 333334,
+      )),
+  Property(
+      title: "Land for 4-Bed Duplex",
+      details:
+          "The very best of comfort in homes as engeneered with the mindset of reliability and maximum comfort",
+      price: 2000000,
+      address: "Salis Court, Gwagwalada, central area",
+      cartegory: Cartegory.homes,
+      images: [
+        "assets/images/props4.jpg",
+        "assets/images/props6.jpg",
+        "assets/images/props7.jpg",
+        "assets/images/props8.jpg",
+        "assets/images/props9.jpg",
+        "assets/images/props11.jpg",
+        "assets/images/props12.jpg",
+      ],
+      video: "assets/images/propsvideo.mp4",
+      siteMap: "assets/images/map.jpg",
+      housePlan: "assets/images/plan.jpg",
+      eletricity: true,
+      security: true,
+      bedrooms: 4,
+      bathrooms: 5,
+      water: true,
+
+      //CREDIBILITY
+      rating: 4,
+      comments: ["The Best Single detarched house i have seen"],
+      //CREDEBILITY
+
+      //PAYMENT
+      outrightPlan: 2000000),
+  Property(
+    title: "Land for 4-Bed Duplex",
+    details:
+        "The very best of comfort in homes as engeneered with the mindset of reliability and maximum comfort",
+    price: 2000000,
+    address: "Salis Court, Gwagwalada, central area",
+    cartegory: Cartegory.homes,
     images: [
       "assets/images/props3.jpg",
       "assets/images/props6.jpg",
@@ -693,49 +652,45 @@ List<Property> newProperties = [
     //CREDEBILITY
 
     //PAYMENT
-    isTaken: false,
-    isPooled: false,
   ),
-  Property(
-      title: "Land for 4-Bed Duplex",
-      details:
-          "The very best of comfort in homes as engeneered with the mindset of reliability and maximum comfort",
-      price: 2000000,
-      location: "Salis Court, Gwagwalada, central area",
-      propType: "Home Stead",
-      images: [
-        "assets/images/props6.jpg",
-        "assets/images/props7.jpg",
-        "assets/images/props8.jpg",
-        "assets/images/props9.jpg",
-        "assets/images/props11.jpg",
-        "assets/images/props12.jpg",
-      ],
-      video: "assets/images/propsvideo.mp4",
-      siteMap: "assets/images/map.jpg",
-      housePlan: "assets/images/plan.jpg",
-      eletricity: true,
-      security: true,
-      bedrooms: 4,
-      bathrooms: 5,
-      water: true,
-
-      //CREDIBILITY
-      rating: 4,
-      comments: ["The Best Single detarched house i have seen"],
-      //CREDEBILITY
-
-      //PAYMENT
-      isTaken: false,
-      isPooled: true,
-      pools: dummyPools),
   Property(
     title: "Land for 4-Bed Duplex",
     details:
         "The very best of comfort in homes as engeneered with the mindset of reliability and maximum comfort",
     price: 2000000,
-    location: "Salis Court, Gwagwalada, central area",
-    propType: "Home Stead",
+    address: "Salis Court, Gwagwalada, central area",
+    cartegory: Cartegory.homes,
+    images: [
+      "assets/images/props6.jpg",
+      "assets/images/props7.jpg",
+      "assets/images/props8.jpg",
+      "assets/images/props9.jpg",
+      "assets/images/props11.jpg",
+      "assets/images/props12.jpg",
+    ],
+    video: "assets/images/propsvideo.mp4",
+    siteMap: "assets/images/map.jpg",
+    housePlan: "assets/images/plan.jpg",
+    eletricity: true,
+    security: true,
+    bedrooms: 4,
+    bathrooms: 5,
+    water: true,
+
+    //CREDIBILITY
+    rating: 4,
+    comments: ["The Best Single detarched house i have seen"],
+    //CREDEBILITY
+
+    //PAYMENT
+  ),
+  Property(
+    title: "Land for 4-Bed Duplex",
+    details:
+        "The very best of comfort in homes as engeneered with the mindset of reliability and maximum comfort",
+    price: 2000000,
+    address: "Salis Court, Gwagwalada, central area",
+    cartegory: Cartegory.homes,
     images: [
       "assets/images/props7.jpg",
       "assets/images/props8.jpg",
@@ -758,16 +713,14 @@ List<Property> newProperties = [
     //CREDEBILITY
 
     //PAYMENT
-    isTaken: false,
-    isPooled: false,
   ),
   Property(
     title: "Land for 4-Bed Duplex",
     details:
         "The very best of comfort in homes as engeneered with the mindset of reliability and maximum comfort",
     price: 2000000,
-    location: "Salis Court, Gwagwalada, central area",
-    propType: "Home Stead",
+    address: "Salis Court, Gwagwalada, central area",
+    cartegory: Cartegory.homes,
     images: [
       "assets/images/props8.jpg",
       "assets/images/props9.jpg",
@@ -789,7 +742,5 @@ List<Property> newProperties = [
     //CREDEBILITY
 
     //PAYMENT
-    isTaken: false,
-    isPooled: true,
   ),
 ];

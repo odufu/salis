@@ -5,8 +5,6 @@ import '../../../../salis/props/presentation/pages/prop_details.dart';
 import '../../../../salis/props/presentation/widgets/terms_and_agreement_page.dart';
 import 'package:flutter/material.dart';
 
-import 'fraction_paid_progress_bar.dart';
-
 class OwnershipSlotsPage extends StatelessWidget {
   final Property property;
   const OwnershipSlotsPage({

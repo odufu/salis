@@ -1,4 +1,5 @@
 import 'dart:async';
+import '../../../../salis/props/data/co_ownership.dart';
 import '../../../../salis/props/data/property.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
@@ -7,11 +8,11 @@ import '../../../../salis/core/utils/helper_functions.dart';
 import '../../../../salis/core/widgets/app_button.dart';
 import '../../../../salis/props/presentation/widgets/ownership_slot_page.dart';
 
-import '../widgets/fraction_paid_progress_bar.dart';
+import '../widgets/pool_progress_bar.dart';
 
 class PropDetails extends StatefulWidget {
   final Property property;
-  PropDetails({
+  const PropDetails({
     required this.property,
     super.key,
   });
@@ -30,12 +31,12 @@ class _PropDetailsState extends State<PropDetails> {
     _pageController = PageController(initialPage: 0);
 
     // Auto-slide every 5 seconds
-    _timer = Timer.periodic(Duration(seconds: 5), (Timer timer) {
+    _timer = Timer.periodic(const Duration(seconds: 5), (Timer timer) {
       int nextPage =
           (_pageController.page!.toInt() + 1) % widget.property.images!.length;
       _pageController.animateToPage(
         nextPage,
-        duration: Duration(milliseconds: 400),
+        duration: const Duration(milliseconds: 400),
         curve: Curves.easeInOut,
       );
     });
@@ -64,7 +65,7 @@ class _PropDetailsState extends State<PropDetails> {
             // Image Slider with Arrow Controls
             Stack(
               children: [
-                Container(
+                SizedBox(
                   height: 200,
                   child: PageView.builder(
                     controller: _pageController,
@@ -85,10 +86,10 @@ class _PropDetailsState extends State<PropDetails> {
                   left: 10,
                   top: 80,
                   child: IconButton(
-                    icon: Icon(Icons.arrow_back_ios, color: Colors.white),
+                    icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
                     onPressed: () {
                       _pageController.previousPage(
-                        duration: Duration(milliseconds: 400),
+                        duration: const Duration(milliseconds: 400),
                         curve: Curves.easeInOut,
                       );
                     },
@@ -98,10 +99,11 @@ class _PropDetailsState extends State<PropDetails> {
                   right: 10,
                   top: 80,
                   child: IconButton(
-                    icon: Icon(Icons.arrow_forward_ios, color: Colors.white),
+                    icon: const Icon(Icons.arrow_forward_ios,
+                        color: Colors.white),
                     onPressed: () {
                       _pageController.nextPage(
-                        duration: Duration(milliseconds: 400),
+                        duration: const Duration(milliseconds: 400),
                         curve: Curves.easeInOut,
                       );
                     },
@@ -154,7 +156,7 @@ class _PropDetailsState extends State<PropDetails> {
                   ),
                   //PROPS TYPE
                   Text(
-                    widget.property.propType,
+                    "Landed",
                     style: TextStyle(
                       fontWeight: FontWeight.w100,
                       fontStyle: FontStyle.italic,
@@ -166,7 +168,7 @@ class _PropDetailsState extends State<PropDetails> {
                   ),
                   // LOCATION
                   Text(
-                    widget.property.location,
+                    widget.property.address,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Theme.of(context).colorScheme.primary,
@@ -205,43 +207,43 @@ class _PropDetailsState extends State<PropDetails> {
                     children: [
                       Row(
                         children: [
-                          Row(
+                          const Row(
                             children: [Icon(Icons.bolt), Text("Electricity")],
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 50,
                           ),
                           Row(
                             children: [
-                              Icon(Icons.apartment),
+                              const Icon(Icons.apartment),
                               Text("Bedrooms: ${widget.property.bedrooms!}")
                             ],
                           ),
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 5,
                       ),
                       Row(
                         children: [
-                          Row(
+                          const Row(
                             children: [Icon(Icons.security), Text("Security")],
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 50,
                           ),
                           Row(
                             children: [
-                              Icon(Icons.bathroom),
+                              const Icon(Icons.bathroom),
                               Text("Bathroom: ${widget.property.bathrooms!}")
                             ],
                           ),
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 5,
                       ),
-                      Row(
+                      const Row(
                         children: [
                           Row(
                             children: [Icon(Icons.water), Text("Water")],
@@ -287,11 +289,11 @@ class _PropDetailsState extends State<PropDetails> {
                         children: [
                           Row(
                             children: [
-                              Icon(
+                              const Icon(
                                 Icons.local_parking,
                                 size: 15,
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 5,
                               ),
                               Text(
@@ -300,11 +302,11 @@ class _PropDetailsState extends State<PropDetails> {
                           ),
                           Row(
                             children: [
-                              Icon(
+                              const Icon(
                                 Icons.landscape,
                                 size: 15,
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 5,
                               ),
                               Text("Garden: ${widget.property.garden ?? 0}")
@@ -312,11 +314,11 @@ class _PropDetailsState extends State<PropDetails> {
                           ),
                           Row(
                             children: [
-                              Icon(
+                              const Icon(
                                 Icons.pool,
                                 size: 15,
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 5,
                               ),
                               Text("Pool: ${widget.property.pool ?? 0}")
@@ -468,7 +470,7 @@ class _PropDetailsState extends State<PropDetails> {
                               decoration: BoxDecoration(
                                   color: Theme.of(context).colorScheme.primary),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 15,
                             ),
                             Column(
@@ -483,10 +485,10 @@ class _PropDetailsState extends State<PropDetails> {
                                       Icons.countertops,
                                       size: 15,
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 5,
                                     ),
-                                    Text("Price/Pool: 10000000"),
+                                    const Text("Price/Pool: 10000000"),
                                   ],
                                 ),
                                 Row(
@@ -498,13 +500,13 @@ class _PropDetailsState extends State<PropDetails> {
                                       Icons.circle,
                                       size: 15,
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 5,
                                     ),
-                                    Text("Opened Pools: 5")
+                                    const Text("Opened Pools: 5")
                                   ],
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 20,
                                 ),
                               ],
@@ -512,36 +514,14 @@ class _PropDetailsState extends State<PropDetails> {
                           ],
                         ),
                         SizedBox(
-                          width: MediaQuery.of(context).size.width * .5,
-                          child: FractionPaidProgressBar(
-                            fractions: [
-                              FractionPaidData(
-                                isPaid: true,
-                                imageUrl: 'assets/profile.png',
-                                amountPaid: 200000,
-                                equityOwned: 20.0,
-                                datePaid: '13 March, 2023',
-                              ),
-                              FractionPaidData(
-                                isPaid: true,
-                                imageUrl: 'assets/profile.png',
-                                amountPaid: 400000,
-                                equityOwned: 40.0,
-                                datePaid: '15 March, 2023',
-                              ),
-                              FractionPaidData(
-                                isPaid: false,
-                                amountToPay: 500000,
-                                equityToOwn: 50.0,
-                              ),
-                              FractionPaidData(
-                                isPaid: false,
-                                amountToPay: 300000,
-                                equityToOwn: 30.0,
-                              ),
-                            ],
-                          ),
-                        ),
+                            width: MediaQuery.of(context).size.width * .5,
+                            child: PoolProgressBar(
+                              plan: CoOwnershipPlan(
+                                  propertyId: "Prop002",
+                                  totalValue: 200000000,
+                                  numberOfShares: 4,
+                                  sharePrice: 300000),
+                            )),
                       ],
                     ),
                   ),
@@ -568,7 +548,7 @@ class _PropDetailsState extends State<PropDetails> {
                             decoration: BoxDecoration(
                                 color: Theme.of(context).colorScheme.primary),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 15,
                           ),
                           Column(
@@ -582,10 +562,10 @@ class _PropDetailsState extends State<PropDetails> {
                                     Icons.done_all,
                                     size: 15,
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 5,
                                   ),
-                                  Text("Status: In Progress")
+                                  const Text("Status: In Progress")
                                 ],
                               ),
                               Row(
@@ -596,10 +576,10 @@ class _PropDetailsState extends State<PropDetails> {
                                     Icons.hourglass_bottom,
                                     size: 15,
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 5,
                                   ),
-                                  Text("Next Payment Due: 24th Dec. 2024")
+                                  const Text("Next Payment Due: 24th Dec. 2024")
                                 ],
                               ),
                             ],
@@ -631,7 +611,7 @@ class _PropDetailsState extends State<PropDetails> {
                         decoration: BoxDecoration(
                             color: Theme.of(context).colorScheme.primary),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 15,
                       ),
                       const Column(

@@ -1,4 +1,4 @@
-import '/salis/props/data/property.dart';
+import '../../../../salis/props/data/property.dart';
 import 'package:flutter/material.dart';
 import 'widgets/my_props_card.dart';
 

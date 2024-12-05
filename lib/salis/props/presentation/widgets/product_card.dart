@@ -5,7 +5,6 @@ import '../../../../salis/props/presentation/pages/prop_details.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/widgets/app_button.dart';
-import 'fraction_paid_progress_bar.dart';
 
 class ProductCard extends StatefulWidget {
   final Property property;

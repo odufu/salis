@@ -1,5 +1,5 @@
 import '../../../../salis/profile/presentation/widgets/dp_card.dart';
-// import 'package:cicdtest/salis/props/presentation/property.dart';
+// import '../../../../salis/props/presentation/property.dart';
 import 'package:flutter/material.dart';
 
 import '../../props/data/property.dart';

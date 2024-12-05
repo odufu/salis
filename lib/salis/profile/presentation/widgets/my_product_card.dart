@@ -3,7 +3,7 @@ import '../../../../salis/myprops/presentation/widgets/my_props_details.dart';
 import '../../../../salis/props/data/property.dart';
 import 'package:flutter/material.dart';
 
-class MyProductCard extends StatelessWidget {
+class MyProductCard extends StatefulWidget {
   final Property property;
   const MyProductCard({
     required this.property,
@@ -11,12 +11,17 @@ class MyProductCard extends StatelessWidget {
   });
 
   @override
+  State<MyProductCard> createState() => _MyProductCardState();
+}
+
+class _MyProductCardState extends State<MyProductCard> {
+  @override
   Widget build(BuildContext context) {
     return IconButton(
       onPressed: () {
         HelperFunctions.routePushTo(
             MyPropsDetails(
-              property: property,
+              property: widget.property,
             ),
             context);
       },
@@ -33,7 +38,7 @@ class MyProductCard extends StatelessWidget {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
                         image: DecorationImage(
-                          image: AssetImage(property.images![0]),
+                          image: AssetImage(widget.property.images![0]),
                         )),
                   ),
                   const SizedBox(
@@ -49,66 +54,72 @@ class MyProductCard extends StatelessWidget {
                       const SizedBox(
                         width: 10,
                       ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            children: [
-                              const Icon(
-                                Icons.apartment,
-                                size: 15,
-                                weight: 4,
-                              ),
-                              const SizedBox(
-                                width: 5,
-                              ),
-                              Text(
-                                property.title,
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color:
-                                        Theme.of(context).colorScheme.primary),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.donut_large,
-                                size: 15,
-                                weight: 4,
-                              ),
-                              SizedBox(
-                                width: 5,
-                              ),
-                              Text(
-                                "My Share: ${((property.price - ((property.instalmentPaid)!.toDouble())) * 100 / property.price).roundToDouble()}%",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.normal,
+                      //P A Y M E N T  D E T A I L S
+
+                      //INSTALLMENTATAL PAYMENT
+                      widget.property.installmentPlan == null
+                          ? CircularProgressIndicator()
+                          : Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  children: [
+                                    const Icon(
+                                      Icons.apartment,
+                                      size: 15,
+                                      weight: 4,
+                                    ),
+                                    const SizedBox(
+                                      width: 5,
+                                    ),
+                                    Text(
+                                      widget.property.title,
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .primary),
+                                    ),
+                                  ],
                                 ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.show_chart,
-                                size: 15,
-                                weight: 4,
-                              ),
-                              SizedBox(
-                                width: 5,
-                              ),
-                              Text(
-                                "Payment: ${(property.price - property.instalmentPaid!.toDouble()).round()}",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.normal,
+                                Row(
+                                  children: [
+                                    const Icon(
+                                      Icons.donut_large,
+                                      size: 15,
+                                      weight: 4,
+                                    ),
+                                    SizedBox(
+                                      width: 5,
+                                    ),
+                                    Text(
+                                      "Total Worth: ${widget.property.installmentPlan!.totalCost}%",
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.normal,
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
+                                Row(
+                                  children: [
+                                    Icon(
+                                      Icons.show_chart,
+                                      size: 15,
+                                      weight: 4,
+                                    ),
+                                    SizedBox(
+                                      width: 5,
+                                    ),
+                                    Text(
+                                      "Payment: ${(widget.property.price - widget.property.installmentPlan!.initialPayment.toDouble()).round()}",
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.normal,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
                     ],
                   )
                 ],

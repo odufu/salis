@@ -1,20 +1,24 @@
+import '../../../../salis/core/utils/helper_functions.dart';
+import '../../../../salis/core/widgets/app_button.dart';
+import '../../../../salis/myprops/presentation/widgets/buy_share_page.dart';
+import '../../../../salis/props/data/co_ownership.dart';
 import 'package:flutter/material.dart';
 
-class FractionPaidProgressBar extends StatelessWidget {
-  final List<FractionPaidData> fractions;
+class PoolProgressBar extends StatelessWidget {
+  final CoOwnershipPlan plan;
 
-  const FractionPaidProgressBar({
-    required this.fractions,
-    Key? key,
-  }) : super(key: key);
+  const PoolProgressBar({
+    required this.plan,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
         double availableWidth =
-            (constraints.maxWidth - 70).clamp(0, double.infinity);
-        int totalFractions = fractions.length;
+            (constraints.maxWidth - 80).clamp(0, double.infinity);
+        int totalFractions = plan.ownershipShares.length;
         double circleDiameter = 24.0;
         double lineWidth = totalFractions > 1
             ? (availableWidth - (totalFractions * circleDiameter)) /
@@ -23,9 +27,9 @@ class FractionPaidProgressBar extends StatelessWidget {
 
         return Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: List.generate(fractions.length, (index) {
-            final fraction = fractions[index];
-            final isLast = index == fractions.length - 1;
+          children: List.generate(plan.ownershipShares.length, (index) {
+            final pool = plan.ownershipShares[index];
+            final isLast = index == plan.ownershipShares.length - 1;
 
             return Row(
               children: [
@@ -35,7 +39,7 @@ class FractionPaidProgressBar extends StatelessWidget {
                       showDialog(
                         context: innerContext,
                         builder: (BuildContext context) {
-                          return FractionPaidModal(fraction: fraction);
+                          return PoolModal(pool: pool);
                         },
                       );
                     },
@@ -43,14 +47,14 @@ class FractionPaidProgressBar extends StatelessWidget {
                       width: circleDiameter,
                       height: circleDiameter,
                       decoration: BoxDecoration(
-                        color: fraction.isPaid ? Colors.green : Colors.white,
+                        color: pool.isOccupied ? Colors.green : Colors.white,
                         shape: BoxShape.circle,
                         border: Border.all(
-                          color: fraction.isPaid ? Colors.green : Colors.brown,
-                          width: fraction.isPaid ? 3 : 1,
+                          color: pool.isOccupied ? Colors.green : Colors.brown,
+                          width: pool.isOccupied ? 3 : 1,
                         ),
                       ),
-                      child: fraction.isPaid
+                      child: pool.isOccupied
                           ? const Icon(
                               Icons.check,
                               size: 16,
@@ -75,7 +79,7 @@ class FractionPaidProgressBar extends StatelessWidget {
   }
 }
 
-class FractionPaidData {
+class Pool {
   final bool isPaid;
   final String imageUrl;
   final double amountPaid;
@@ -84,7 +88,7 @@ class FractionPaidData {
   final double amountToPay;
   final double equityToOwn;
 
-  FractionPaidData({
+  Pool({
     required this.isPaid,
     this.imageUrl = '',
     this.amountPaid = 0.0,
@@ -95,11 +99,11 @@ class FractionPaidData {
   });
 }
 
-class FractionPaidModal extends StatelessWidget {
-  final FractionPaidData fraction;
+class PoolModal extends StatelessWidget {
+  final OwnershipPool pool;
 
-  const FractionPaidModal({
-    required this.fraction,
+  const PoolModal({
+    required this.pool,
     Key? key,
   }) : super(key: key);
 
@@ -113,29 +117,29 @@ class FractionPaidModal extends StatelessWidget {
       content: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,
-          children: fraction.isPaid
+          children: pool.isOccupied
               ? [
                   CircleAvatar(
                     radius: 40,
-                    backgroundImage: fraction.imageUrl.isNotEmpty
-                        ? AssetImage(fraction.imageUrl)
-                        : const AssetImage('assets/default_image.png'),
+                    backgroundImage: pool.ownersImage!.isNotEmpty
+                        ? AssetImage(pool.ownersImage!)
+                        : const AssetImage('assets/profile.png'),
                   ),
                   const SizedBox(height: 16),
                   Text(
-                    "Amount Paid: \₦${fraction.amountPaid.toStringAsFixed(2)}",
+                    "Amount Paid: \₦${pool.sharePrice.toStringAsFixed(2)}",
                     style: Theme.of(context).textTheme.bodyLarge ??
                         const TextStyle(fontSize: 16),
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    "Equity Owned: ${fraction.equityOwned.toStringAsFixed(2)}%",
+                    "Equity Owned: ${pool.equityShare.toStringAsFixed(2)}%",
                     style: Theme.of(context).textTheme.bodyLarge ??
                         const TextStyle(fontSize: 16),
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    "Date Paid: ${fraction.datePaid}",
+                    "Date Paid: ${pool.dateCreated}",
                     style: Theme.of(context).textTheme.bodyMedium ??
                         const TextStyle(fontSize: 14),
                   ),
@@ -154,26 +158,56 @@ class FractionPaidModal extends StatelessWidget {
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 16),
-                  Text(
-                    "Amount to Pay: \₦${fraction.amountToPay.toStringAsFixed(2)}",
-                    style: Theme.of(context).textTheme.bodyLarge ??
-                        const TextStyle(fontSize: 16),
+                  Row(
+                    children: [
+                      const Icon(Icons.paid),
+                      const SizedBox(
+                        width: 20,
+                      ),
+                      Text(
+                        "Share Price: \₦${pool.sharePrice.toStringAsFixed(2)}",
+                        style: Theme.of(context).textTheme.bodyLarge ??
+                            const TextStyle(fontSize: 16),
+                      ),
+                    ],
                   ),
                   const SizedBox(height: 8),
-                  Text(
-                    "Equity to Own: ${fraction.equityToOwn.toStringAsFixed(2)}%",
-                    style: Theme.of(context).textTheme.bodyLarge ??
-                        const TextStyle(fontSize: 16),
+                  Row(
+                    children: [
+                      const Icon(Icons.pie_chart),
+                      const SizedBox(
+                        width: 20,
+                      ),
+                      Text(
+                        "Equity Size: ${pool.equityShare.toStringAsFixed(2)}%",
+                        style: Theme.of(context).textTheme.bodyLarge ??
+                            const TextStyle(fontSize: 16),
+                      ),
+                    ],
                   ),
                 ],
         ),
       ),
       actions: [
-        TextButton(
-          onPressed: () {
+        AppButton(
+          text: "Buy",
+          onPress: () {
+            HelperFunctions.routePushTo(
+                BuySharePage(
+                  pool: pool,
+                ),
+                context);
+          },
+          backgroundColor: const Color.fromARGB(255, 37, 99, 39),
+          width: 100,
+        ),
+        AppButton(
+          text: "Close",
+          onPress: () {
             Navigator.of(context).pop();
           },
-          child: const Text("Close"),
+          width: 100,
+          backgroundColor: Colors.red,
         ),
       ],
     );

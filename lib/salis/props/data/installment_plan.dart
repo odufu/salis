@@ -2,6 +2,7 @@ enum PaymentFrequency { daily, weekly, monthly, quarterly, yearly }
 
 class InstallmentPlan {
   final double totalCost;
+  double? amountPaid = 0;
   final double initialPayment;
   final PaymentFrequency frequency;
   final List<double> paymentAmounts;
@@ -9,6 +10,7 @@ class InstallmentPlan {
 
   InstallmentPlan({
     required this.totalCost,
+    this.amountPaid,
     required this.initialPayment,
     required this.frequency,
   })  : paymentAmounts =
