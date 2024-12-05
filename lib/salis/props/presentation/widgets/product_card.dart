@@ -1,7 +1,7 @@
 import 'dart:async';
-import 'package:cicdtest/salis/core/utils/helper_functions.dart';
-import 'package:cicdtest/salis/props/data/property.dart';
-import 'package:cicdtest/salis/props/presentation/pages/prop_details.dart';
+import '../../../../salis/core/utils/helper_functions.dart';
+import '../../../../salis/props/data/property.dart';
+import '../../../../salis/props/presentation/pages/prop_details.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/widgets/app_button.dart';

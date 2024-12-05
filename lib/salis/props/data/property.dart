@@ -1,4 +1,4 @@
-import 'package:cicdtest/salis/props/data/payment_pool.dart';
+import '../../../../salis/props/data/payment_pool.dart';
 
 class Property {
   //BASIC DETAILS

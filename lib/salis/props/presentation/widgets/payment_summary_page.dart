@@ -1,7 +1,7 @@
-import 'package:cicdtest/salis/core/utils/helper_functions.dart';
-import 'package:cicdtest/salis/core/widgets/app_button.dart';
-import 'package:cicdtest/salis/home/presentation/pages/home_page.dart';
-import 'package:cicdtest/salis/myprops/presentation/my_props.dart';
+import '../../../../salis/core/utils/helper_functions.dart';
+import '../../../../salis/core/widgets/app_button.dart';
+import '../../../../salis/home/presentation/pages/home_page.dart';
+import '../../../../salis/myprops/presentation/my_props.dart';
 import 'package:flutter/material.dart';
 
 class PaymentSummaryPage extends StatelessWidget {

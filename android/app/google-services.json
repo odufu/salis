@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "746270310311",
+    "project_id": "test-8ec31",
+    "storage_bucket": "test-8ec31.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:746270310311:android:4e9ed955e25702ccf30082",
+        "android_client_info": {
+          "package_name": "com.company.salis"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIJ0FSpIy4UvLUCbER663HKaj4XQuPe8Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

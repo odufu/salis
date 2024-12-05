@@ -1,11 +1,11 @@
 import 'dart:async';
-import 'package:cicdtest/salis/props/data/property.dart';
+import '../../../../salis/props/data/property.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 import 'package:chewie/chewie.dart';
-import 'package:cicdtest/salis/core/utils/helper_functions.dart';
-import 'package:cicdtest/salis/core/widgets/app_button.dart';
-import 'package:cicdtest/salis/props/presentation/widgets/ownership_slot_page.dart';
+import '../../../../salis/core/utils/helper_functions.dart';
+import '../../../../salis/core/widgets/app_button.dart';
+import '../../../../salis/props/presentation/widgets/ownership_slot_page.dart';
 
 import '../../../props/presentation/widgets/fraction_paid_progress_bar.dart';
 

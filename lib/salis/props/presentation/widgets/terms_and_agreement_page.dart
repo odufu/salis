@@ -1,6 +1,6 @@
-import 'package:cicdtest/salis/core/utils/helper_functions.dart';
-import 'package:cicdtest/salis/core/widgets/app_button.dart';
-import 'package:cicdtest/salis/props/presentation/widgets/payment_summary_page.dart';
+import '../../../../salis/core/utils/helper_functions.dart';
+import '../../../../salis/core/widgets/app_button.dart';
+import '../../../../salis/props/presentation/widgets/payment_summary_page.dart';
 import 'package:flutter/material.dart';
 
 class TermsAndAgreementPage extends StatelessWidget {

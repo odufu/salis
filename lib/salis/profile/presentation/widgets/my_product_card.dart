@@ -1,6 +1,6 @@
-import 'package:cicdtest/salis/core/utils/helper_functions.dart';
-import 'package:cicdtest/salis/myprops/presentation/widgets/my_props_details.dart';
-import 'package:cicdtest/salis/props/data/property.dart';
+import '../../../../salis/core/utils/helper_functions.dart';
+import '../../../../salis/myprops/presentation/widgets/my_props_details.dart';
+import '../../../../salis/props/data/property.dart';
 import 'package:flutter/material.dart';
 
 class MyProductCard extends StatelessWidget {

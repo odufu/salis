@@ -1,4 +1,4 @@
-import 'package:cicdtest/salis/home/presentation/pages/home_page.dart';
+import '../../../../salis/home/presentation/pages/home_page.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/utils/helper_functions.dart';

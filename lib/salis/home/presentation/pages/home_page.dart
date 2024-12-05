@@ -1,8 +1,8 @@
-import 'package:cicdtest/salis/core/utils/helper_functions.dart';
-import 'package:cicdtest/salis/home_page/presentation/home_page.dart';
-import 'package:cicdtest/salis/myprops/presentation/my_props.dart';
-import 'package:cicdtest/salis/profile/presentation/profile.dart';
-import 'package:cicdtest/salis/props/presentation/property.dart';
+import '/salis/core/utils/helper_functions.dart';
+import '/salis/home_page/presentation/home_page.dart';
+import '/salis/myprops/presentation/my_props.dart';
+import '/salis/profile/presentation/profile.dart';
+import '/salis/props/presentation/property.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable

@@ -1,4 +1,4 @@
-import 'package:cicdtest/salis/profile/presentation/widgets/dp_card.dart';
+import '../../../../salis/profile/presentation/widgets/dp_card.dart';
 // import 'package:cicdtest/salis/props/presentation/property.dart';
 import 'package:flutter/material.dart';
 
