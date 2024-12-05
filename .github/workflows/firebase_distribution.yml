@@ -46,7 +46,7 @@ jobs:
         run: |
           echo "${FIREBASE_SERVICE_ACCOUNT}" > firebase_service_account.json
           gcloud auth activate-service-account --key-file=firebase_service_account.json
-          gcloud --quiet config set project test-8ec31
+          gcloud --quiet config set project salis-23cd7
 
       - name: Upload to Firebase App Distribution
         env:
@@ -57,7 +57,7 @@ jobs:
             --app 1:345769754556:android:b138bbd53bfaca235435b9 \
             --release-notes "Automated release from GitHub Actions" \
             --groups "testers" \
-            --project test-8ec31
+            --project salis-23cd7
 
       - name: Clean up
         run: rm firebase_service_account.json
