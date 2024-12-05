@@ -41,21 +41,23 @@ jobs:
         run: curl -sL https://firebase.tools | bash
 
       - name: Authenticate with Firebase using Service Account
+        env:
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
         run: |
+          echo "${FIREBASE_SERVICE_ACCOUNT}" > firebase_service_account.json
           gcloud auth activate-service-account --key-file=firebase_service_account.json
           gcloud --quiet config set project buga-21825
-          
+
       - name: Upload to Firebase App Distribution
         env:
           GOOGLE_APPLICATION_CREDENTIALS: firebase_service_account.json
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
         run: |
           firebase appdistribution:distribute build/app/outputs/flutter-apk/app-release.apk \
-            --app 1:746270310311:android:4e9ed955e25702ccf30082 \
+            --app 1:345769754556:android:b138bbd53bfaca235435b9 \
             --release-notes "Automated release from GitHub Actions" \
             --groups "testers" \
             --project test-8ec31
-
 
       - name: Clean up
         run: rm firebase_service_account.json
