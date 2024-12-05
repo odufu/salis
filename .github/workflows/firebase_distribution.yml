@@ -46,7 +46,7 @@ jobs:
         run: |
           echo "${FIREBASE_SERVICE_ACCOUNT}" > firebase_service_account.json
           gcloud auth activate-service-account --key-file=firebase_service_account.json
-          gcloud --quiet config set project buga-21825
+          gcloud --quiet config set project test-8ec31
 
       - name: Upload to Firebase App Distribution
         env:
