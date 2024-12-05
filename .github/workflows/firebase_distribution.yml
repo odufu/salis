@@ -41,13 +41,10 @@ jobs:
         run: curl -sL https://firebase.tools | bash
 
       - name: Authenticate with Firebase using Service Account
-        env:
-          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
         run: |
-          echo "${FIREBASE_SERVICE_ACCOUNT}" > firebase_service_account.json
           gcloud auth activate-service-account --key-file=firebase_service_account.json
           gcloud --quiet config set project buga-21825
-
+          
       - name: Upload to Firebase App Distribution
         env:
           GOOGLE_APPLICATION_CREDENTIALS: firebase_service_account.json
